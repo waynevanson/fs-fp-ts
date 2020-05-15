@@ -35,12 +35,12 @@ export function access<U extends AccessMode[]>(
   ...modes: EnforceNonEmptyArray<U>
 ) {
   const newModes = transformAccessModes(modes);
-  return <T extends fs.PathLike>(path: T) =>
+  return <T extends fs.PathLike>(pathLike: T) =>
     taskEither.tryCatch(
       () =>
         new Promise<T>((resolve, reject) => {
-          fs.access(path, newModes, (e) => {
-            !e ? resolve(path) : reject(e);
+          fs.access(pathLike, newModes, (e) => {
+            !e ? resolve(pathLike) : reject(e);
           });
         }),
       enforceErrnoException

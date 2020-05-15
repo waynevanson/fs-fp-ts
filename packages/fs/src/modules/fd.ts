@@ -1,9 +1,9 @@
 export {
-  appendFile,
   fchown,
   fdatasync,
   fstat,
   fsync,
   ftruncate,
   futimes,
+  fchmod,
 } from "../api";

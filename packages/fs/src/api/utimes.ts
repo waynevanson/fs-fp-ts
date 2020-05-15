@@ -1,11 +1,16 @@
 import { taskEither } from "fp-ts";
 import * as fs from "fs";
-import { enforceErrnoException } from "../util";
+import { enforceErrnoException, Time } from "../util";
 
-export function a() {
-  return () =>
+export function utimes<A extends Time, M extends Time>(atime: A, mtime: M) {
+  return <P extends fs.PathLike>(pathLike: P) =>
     taskEither.tryCatch(
-      () => new Promise((resolve, reject) => {}),
+      () =>
+        new Promise<P>((resolve, reject) => {
+          fs.utimes(pathLike, atime, mtime, (e) =>
+            !e ? resolve(pathLike) : reject(e)
+          );
+        }),
       enforceErrnoException
     );
 }

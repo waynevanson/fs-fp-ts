@@ -1,7 +1,6 @@
 import { taskEither } from "fp-ts";
 import * as fs from "fs";
-import { enforceErrnoException } from "../util";
-import { FileSystemFlags } from "../flags";
+import { enforceErrnoException, FileSystemFlags } from "../util";
 
 export function open<F extends FileSystemFlags, M extends number>(
   flags: F,

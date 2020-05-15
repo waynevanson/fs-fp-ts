@@ -2,8 +2,6 @@ import * as fs from "fs";
 import { taskEither } from "fp-ts";
 import { enforceErrnoException } from "../util";
 
-export const {} = fs.constants;
-
 export function writeFile<O extends fs.WriteFileOptions>(options: O) {
   return <
     T extends fs.PathLike | number,
