@@ -1,0 +1,10 @@
+{
+  "name": "@fp-ts-node/monorepo",
+  "version": "0.0.0",
+  "author": "Wayne Van Son",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
+}
