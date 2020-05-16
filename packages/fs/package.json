@@ -4,7 +4,7 @@
   "description": "fp-ts bindings for node fs",
   "main": "src/index.ts",
   "author": "Wayne Van Son",
-  "homepage": "https://github.com/waynevanson/fp-ts-node/fs",
+  "homepage": "https://waynevanson.github.io/fp-ts-node/fs",
   "license": "MIT",
   "private": false,
   "scripts": {
