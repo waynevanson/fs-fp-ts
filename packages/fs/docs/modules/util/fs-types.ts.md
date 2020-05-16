@@ -1,96 +1,49 @@
-/**
- * @since 0.0.0
- */
-import {} from "fp-ts";
+---
+title: util/fs-types.ts
+nav_order: 44
+parent: Modules
+---
 
-/**
- * @since 0.0.0
- */
-export type Time = string | number | Date;
+# fs-types overview
 
-/**
- * @since 0.0.0
- */
-export type FileDescriptor = number;
+Added in v0.0.0
 
-/**
- * @summary
- *
- *
- * @description
- *  - `a` - Open file for appending. The file is created if it does not exist.
- *
- *  - `ax` - Like `a` but fails if the path exists.
- *
- *  - `a+` - Open file for reading and appending.The file is created if it does not exist.
- *
- *  - `ax+` - Like `a+` but fails if the path exists.
- *
- *  - `as` - Open file for appending in synchronous mode. The file is created if it does not exist.
- *
- *  - `as+` - Open file for reading and appending in synchronous mode. The file is created if it does not exist.
- *
- *  - `r` - Open file for reading. An exception occurs if the file does not exist.
- *
- *  - `r+` - Open file for reading and writing. An exception occurs if the file does not exist.
- *
- *  - `rs+` - Open file for reading and writing in synchronous mode. Instructs the operating system to bypass the local file system cache.
- *
- *  - `w` - Open file for writing. The file is created (if it does not exist) or truncated (if it exists).
- *
- *  - `wx` - Like `w` but fails if the path exists.
- *
- *  - `w+` - Open file for reading and writing. The file is created (if it does not exist) or truncated (if it exists).
- *
- *  - `wx+` - Like `w+` but fails if the path exists.
- *
- * @todo
- * Create a separate type for each string literal so each has a description on hover.
- * A quick test proved that this doesn't work the way I expected it to.
- *
- * @since 0.0.0
- */
-export type FileSystemFlags =
-  | "a"
-  | "ax"
-  | "a+"
-  | "ax+"
-  | "as"
-  | "as+"
-  | "r"
-  | "r+"
-  | "rs+"
-  | "w"
-  | "wx"
-  | "w+"
-  | "wx+";
+---
 
-/**
- * @summary
- * A range of numbers between `0o000` and `0o777`, which
- * are used in the `MODE` argument of `chmod` and `chown`.
- *
- * @description
- * For `0oxyz`, `x`, `y` and `z` must be within `0` to `7`.
- * `0o` is the notation for octal literals.
- *
- * `1`,`2` and `4` are the single permissions,
- * with the other numbers as the sum of these 3.
- *
- * - `0` - No permissions
- * - `1` - ___Executable___
- * - `2` - ___Writeable___
- * - `3` - Executable and Writeable
- * - `4` - ___Readable___
- * - `5` - Executable and Readable
- * - `6` - Readable and Writeable
- * - `7` - Executable, Readable and Writable
- *
- * It's the preferred way to write permissions as they're
- * easier to read compare to `fs.constants.*`
- *
- * @since 0.0.0
- */
+<h2 class="text-delta">Table of contents</h2>
+
+- [FileDescriptor (type alias)](#filedescriptor-type-alias)
+- [FileSystemFlags (type alias)](#filesystemflags-type-alias)
+- [Permissions (type alias)](#permissions-type-alias)
+- [Time (type alias)](#time-type-alias)
+
+---
+
+# FileDescriptor (type alias)
+
+**Signature**
+
+```ts
+export type FileDescriptor = number
+```
+
+Added in v0.0.0
+
+# FileSystemFlags (type alias)
+
+**Signature**
+
+```ts
+export type FileSystemFlags = 'a' | 'ax' | 'a+' | 'ax+' | 'as' | 'as+' | 'r' | 'r+' | 'rs+' | 'w' | 'wx' | 'w+' | 'wx+'
+```
+
+Added in v0.0.0
+
+# Permissions (type alias)
+
+**Signature**
+
+```ts
 export type Permissions =
   | 0o000
   | 0o001
@@ -539,4 +492,17 @@ export type Permissions =
   | 0o773
   | 0o774
   | 0o775
-  | 0o776;
+  | 0o776
+```
+
+Added in v0.0.0
+
+# Time (type alias)
+
+**Signature**
+
+```ts
+export type Time = string | number | Date
+```
+
+Added in v0.0.0
