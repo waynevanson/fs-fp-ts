@@ -4,6 +4,7 @@
 import { taskEither } from "fp-ts";
 import * as fs from "fs";
 import { enforceErrnoException, FileSystemFlags, Permissions } from "./util";
+
 /**
  * @since 0.0.0
  */
@@ -12,9 +13,9 @@ export type AppendFileOptions = {
   flags?: FileSystemFlags;
   mode?: Permissions;
 };
+
 /**
  * @summary
- * hello world
  *
  * @since 0.0.0
  */

@@ -1,10 +1,19 @@
+/**
+ * @since 0.0.0
+ */
 import { array, eq, taskEither } from "fp-ts";
 import { pipe } from "fp-ts/lib/pipeable";
 import * as fs from "fs";
 import { enforceErrnoException, EnforceNonEmptyArray } from "./util";
 
+/**
+ * @since 0.0.0
+ */
 export type AccessMode = "visible" | "readable" | "writeable" | "executable";
 
+/**
+ * @since 0.0.0
+ */
 function getAccessMode(a: AccessMode) {
   switch (a) {
     case "executable":
@@ -29,8 +38,9 @@ function transformAccessModes(a: AccessMode[]) {
 }
 
 /**
- * @todo uniquify `modes` arguments at type level.
- * @type
+ * @todo uniquify `modes` arguments at type level
+ *
+ *  @since 0.0.0
  */
 export function access<U extends AccessMode[]>(
   ...modes: EnforceNonEmptyArray<U>
@@ -47,4 +57,3 @@ export function access<U extends AccessMode[]>(
       enforceErrnoException
     );
 }
-access("visible");
