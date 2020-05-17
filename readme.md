@@ -1,11 +1,11 @@
-# fp-ts-node/fs
+# fs-fp-ts
 
 `fp-ts` bindings for the Node File System API's
 
 Most are covered, but some are left out due to their immutable nature.
 We could cover this, but it's not a required feature for `v1.x`
 
-All node bindings that throw are caught and returned as `Right<NodeJS.ErrnoException>`
+All node bindings that throw are caught and returned as `Right<NodeJS.ErrnoException, T>`
 
 ## Installation
 
@@ -13,17 +13,17 @@ All node bindings that throw are caught and returned as `Right<NodeJS.ErrnoExcep
 
 ```ts
 // yarn
-yarn add fp-ts-node fp-ts
+yarn add fs-fp-ts fp-ts
 
 // npm
-npm install fp-ts-node fp-ts
+npm install fs-fp-ts fp-ts
 ```
 
 ## Usage
 
-`fp-ts-fs` he following exports:
+`fs-fp-ts` he following exports:
 
 ```ts
 // Standard FS functions
-export * as fs from "./fp-ts-fs";
+export * as fs from "./fs-fp-ts";
 ```
