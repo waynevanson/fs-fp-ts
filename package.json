@@ -1,0 +1,37 @@
+{
+  "name": "fp-ts-fs",
+  "version": "0.0.0",
+  "files": [
+    "dist"
+  ],
+  "description": "fp-ts bindings for the Node File System (FS) API",
+  "homepage": "https://waynevanson.github.io/fp-ts-fs",
+  "main": "src/index.ts",
+  "module": "dist/esm/index.js",
+  "author": "Wayne Van Son",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "test": "yarn jest",
+    "watch": "yarn jest --watchAll",
+    "build": "tsc",
+    "docs": "docs-ts"
+  },
+  "peerDependencies": {
+    "fp-ts": "^2.6.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.2.2",
+    "@types/node": "^14.0.1",
+    "@types/prettier": "^2.0.0",
+    "fp-ts": "^2.6.0",
+    "jest": "^26.0.1",
+    "prettier": "^2.0.5",
+    "ts-jest": "^25.5.1",
+    "ts-node": "^8.10.1",
+    "typescript": "^3.9.2"
+  },
+  "dependencies": {
+    "docs-ts": "^0.4.0"
+  }
+}
