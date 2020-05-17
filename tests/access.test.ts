@@ -1,7 +1,7 @@
-import * as fs from "@fp-ts-node/fs";
 import { array, either, taskEither } from "fp-ts";
 import { pipe } from "fp-ts/lib/pipeable";
 import * as path from "path";
+import * as fs from "../src";
 
 export const fixturesDir = path.resolve(__dirname, "fixtures");
 

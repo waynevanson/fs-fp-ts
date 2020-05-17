@@ -1,6 +1,6 @@
-import * as fs from "@fp-ts-node/fs";
 import { either } from "fp-ts";
 import * as path from "path";
+import * as fs from "../src";
 
 export const fixturesDir = path.resolve(__dirname, "fixtures");
 
