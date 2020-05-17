@@ -5,7 +5,11 @@
     "dist"
   ],
   "description": "fp-ts bindings for the Node File System (FS) API",
-  "homepage": "https://waynevanson.github.io/fp-ts-fs",
+  "homepage": "https://waynevanson.github.io/fs-fp-ts",
+  "repository": {
+    "url": "http://github.com/waynevanson/fs-fp-ts",
+    "type": "github"
+  },
   "main": "src/index.ts",
   "module": "dist/esm/index.js",
   "author": "Wayne Van Son",
@@ -15,7 +19,8 @@
     "test": "yarn jest",
     "watch": "yarn jest --watchAll",
     "build": "tsc",
-    "docs": "docs-ts"
+    "docs": "docs-ts",
+    "prepublishOnly": "yarn test && yarn build && yarn docs"
   },
   "peerDependencies": {
     "fp-ts": "^2.6.0"
