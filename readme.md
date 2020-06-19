@@ -18,12 +18,3 @@ yarn add fs-fp-ts fp-ts
 // npm
 npm install fs-fp-ts fp-ts
 ```
-
-## Usage
-
-`fs-fp-ts` he following exports:
-
-```ts
-// Standard FS functions
-export * as fs from "./fs-fp-ts";
-```
