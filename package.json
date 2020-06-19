@@ -19,7 +19,6 @@
     "test": "yarn jest",
     "watch": "yarn jest --watchAll",
     "build": "tsc",
-    "docs": "docs-ts",
     "prepublishOnly": "yarn test && yarn build && yarn docs"
   },
   "peerDependencies": {
