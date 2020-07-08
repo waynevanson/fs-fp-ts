@@ -1,5 +1,5 @@
-import { taskEither } from "fp-ts";
-import * as fs from "fs";
+import { taskEither as TE } from "fp-ts";
+import * as _fs from "fs";
 import { enforceErrnoException, FileDescriptor } from "./util";
 import { ReaderTaskEitherNode, TaskEitherNode } from "./util/types/fp";
 
@@ -8,10 +8,10 @@ export function _fchown(
   uid: number,
   gid: number
 ): TaskEitherNode {
-  return taskEither.tryCatch(
+  return TE.tryCatch(
     () =>
       new Promise<void>((resolve, reject) => {
-        fs.fchown(pathLike, uid, gid, (e) => (!e ? resolve() : reject(e)));
+        _fs.fchown(pathLike, uid, gid, (e) => (!e ? resolve() : reject(e)));
       }),
     enforceErrnoException
   );

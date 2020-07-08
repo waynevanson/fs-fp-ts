@@ -1,5 +1,5 @@
-import { taskEither } from "fp-ts";
-import * as fs from "fs";
+import { taskEither as TE } from "fp-ts";
+import * as _fs from "fs";
 import { enforceErrnoException, FileDescriptor } from "./util";
 import { ReaderTaskEitherNode } from "./util/types/fp";
 
@@ -8,10 +8,10 @@ import { ReaderTaskEitherNode } from "./util/types/fp";
  * Closes a file descriptor
  */
 export const close: ReaderTaskEitherNode<FileDescriptor> = (fileDescriptor) =>
-  taskEither.tryCatch(
+  TE.tryCatch(
     () =>
       new Promise<void>((resolve, reject) => {
-        fs.close(fileDescriptor, (e) => (!e ? resolve() : reject));
+        _fs.close(fileDescriptor, (e) => (!e ? resolve() : reject));
       }),
     enforceErrnoException
   );

@@ -1,4 +1,4 @@
-import { array, eq, taskEither } from "fp-ts";
+import { array as A, eq as EQ, taskEither as TE } from "fp-ts";
 import { pipe } from "fp-ts/lib/pipeable";
 import * as _fs from "fs";
 import { enforceErrnoException, EnforceNonEmptyArray } from "./util";
@@ -33,9 +33,9 @@ function getAccessMode(mode: AccessMode) {
 function transformAccessModes(modes: AccessMode[]) {
   return pipe(
     modes,
-    array.uniq(eq.contramap((a: AccessMode): string => a)(eq.eqString)),
-    array.map(getAccessMode),
-    array.reduce(0, (prev, curr) => prev | curr)
+    A.uniq(EQ.contramap((a: AccessMode): string => a)(EQ.eqString)),
+    A.map(getAccessMode),
+    A.reduce(0, (prev, curr) => prev | curr)
   );
 }
 
@@ -44,7 +44,7 @@ function _access<U extends AccessMode>(
   modes: EnforceNonEmptyArray<U[]>
 ) {
   const newModes = transformAccessModes(modes);
-  return taskEither.tryCatch(
+  return TE.tryCatch(
     () =>
       new Promise<void>((resolve, reject) => {
         _fs.access(pathLike, newModes, (e) => {

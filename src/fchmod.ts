@@ -1,4 +1,4 @@
-import { taskEither } from "fp-ts";
+import { taskEither as TE } from "fp-ts";
 import * as _fs from "fs";
 import { enforceErrnoException, FileDescriptor } from "./util";
 import { FilePermissions } from "./util/types/file-permissions";
@@ -8,7 +8,7 @@ export function _fchmod(
   fileDescriptor: FileDescriptor,
   mode: FilePermissions
 ): TaskEitherNode {
-  return taskEither.tryCatch(
+  return TE.tryCatch(
     () =>
       new Promise<void>((resolve, reject) => {
         _fs.fchmod(fileDescriptor, mode, (e) => {

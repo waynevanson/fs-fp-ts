@@ -1,7 +1,7 @@
 /**
  * @since 0.0.0
  */
-import { taskEither } from "fp-ts";
+import { taskEither as TE } from "fp-ts";
 import * as _fs from "fs";
 import { enforceErrnoException } from "./util";
 import { TaskEitherNode } from "./util/types/fp";
@@ -22,7 +22,7 @@ function _copyFile(
   { replace }: CopyFileOptions
 ) {
   const flags = !replace ? _fs.constants.COPYFILE_EXCL : 0;
-  return taskEither.tryCatch(
+  return TE.tryCatch(
     () =>
       new Promise<void>((resolve, reject) => {
         _fs.copyFile(src, dest, flags, (e) => (!e ? resolve() : reject(e)));

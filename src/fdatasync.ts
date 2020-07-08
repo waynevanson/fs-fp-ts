@@ -1,8 +1,8 @@
 /**
  * @since 0.0.0
  */
-import { taskEither } from "fp-ts";
-import * as fs from "fs";
+import { taskEither as TE } from "fp-ts";
+import * as _fs from "fs";
 import { enforceErrnoException, FileDescriptor } from "./util";
 import { ReaderTaskEitherNode } from "./util/types/fp";
 
@@ -12,10 +12,10 @@ import { ReaderTaskEitherNode } from "./util/types/fp";
 export const fdatasync: ReaderTaskEitherNode<FileDescriptor> = (
   fileDescriptor
 ) =>
-  taskEither.tryCatch(
+  TE.tryCatch(
     () =>
       new Promise<void>((resolve, reject) => {
-        fs.fdatasync(fileDescriptor, (e) => (!e ? resolve() : reject(e)));
+        _fs.fdatasync(fileDescriptor, (e) => (!e ? resolve() : reject(e)));
       }),
     enforceErrnoException
   );
