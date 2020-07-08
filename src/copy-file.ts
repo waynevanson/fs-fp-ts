@@ -4,7 +4,7 @@
 import { taskEither } from "fp-ts";
 import * as _fs from "fs";
 import { enforceErrnoException } from "./util";
-import { ReaderTaskEitherNode, TaskEitherNode } from "./util/types/fp";
+import { TaskEitherNode } from "./util/types/fp";
 
 export type CopyFileOptions = {
   /**
