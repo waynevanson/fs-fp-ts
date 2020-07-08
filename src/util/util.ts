@@ -11,7 +11,7 @@ import { PartialKeys } from "./helper-types";
  *
  * @since 0.0.0
  */
-export function enforceErrnoException(e: any) {
+export function enforceErrnoException(e: unknown) {
   return e as NodeJS.ErrnoException;
 }
 
