@@ -23,4 +23,12 @@ export function lchmod(mode: FileMode): ReaderTaskEitherNode<_fs.PathLike>;
 
 export function lchmod(pathLike: _fs.PathLike, mode: FileMode): TaskEitherNode;
 
-export function lchmod(mode: FileMode): ReaderTaskEitherNode<_fs.PathLike> {}
+export function lchmod(a: _fs.PathLike | FileMode, b?: FileMode) {
+  if (b === undefined) {
+    const mode = a as FileMode;
+    return (pathLike: _fs.PathLike) => _lchmod(pathLike, mode);
+  }
+  const pathLike = a as _fs.PathLike;
+  const mode = b as FileMode;
+  return _lchmod(pathLike, mode);
+}

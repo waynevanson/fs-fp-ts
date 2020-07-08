@@ -11,3 +11,4 @@ export { fstat } from "./fstat";
 export { fsync } from "./fsync";
 export { TruncateOptions, ftruncate } from "./ftruncate";
 export { futimes } from "./futimes";
+export { lchmod } from "./lchmod";
