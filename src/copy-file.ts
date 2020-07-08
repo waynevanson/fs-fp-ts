@@ -16,7 +16,7 @@ export type CopyFileOptions = {
   replace: boolean;
 };
 
-function _copyFile(
+export function _copyFile(
   src: _fs.PathLike,
   dest: _fs.PathLike,
   { replace }: CopyFileOptions

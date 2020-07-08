@@ -13,7 +13,7 @@ export type AccessMode = "visible" | "readable" | "writeable" | "executable";
 /**
  * Convert the `AccessMode` string type to it's associated constant.
  */
-function getAccessMode(mode: AccessMode) {
+export function getAccessMode(mode: AccessMode) {
   switch (mode) {
     case "executable":
       return _fs.constants.X_OK;
@@ -30,7 +30,7 @@ function getAccessMode(mode: AccessMode) {
 /**
  * Uniquify and reduce the access modes into a number that fs can handle.
  */
-function transformAccessModes(modes: AccessMode[]) {
+export function transformAccessModes(modes: AccessMode[]) {
   return pipe(
     modes,
     A.uniq(EQ.contramap((a: AccessMode): string => a)(EQ.eqString)),
@@ -39,7 +39,7 @@ function transformAccessModes(modes: AccessMode[]) {
   );
 }
 
-function _access<U extends AccessMode>(
+export function _access<U extends AccessMode>(
   pathLike: _fs.PathLike,
   modes: EnforceNonEmptyArray<U[]>
 ) {
