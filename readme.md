@@ -7,10 +7,10 @@ We could cover this, but it's not a required feature for `v1.x`
 
 ## Goals
 
-- [ ] curried and partially applied implementations
-- [ ] provide coverage of all existing node.fs apis
-- [ ] additions, similar to fs-extra, to make complicated tasks easier.
-- [ ] offer different overloads, such as all in one (standard) and `reader<path>`
+- [ ] All existing `fs` API's but functional.
+- [ ] Clearer documentation.
+- [ ] Partially applied functions sensibly implemented.
+- [ ] Reader implementations with File Descriptor and PathLike.
 
 ## Installation
 
