@@ -1,5 +1,5 @@
 import { taskEither } from "fp-ts";
-import * as fs from "fs";
+import * as _fs from "fs";
 import { enforceErrnoException, Time, FileDescriptor } from "./util";
 import { ReaderTaskEitherNode, TaskEitherNode } from "./util/types/fp";
 
@@ -11,7 +11,7 @@ export function _futimes(
   return taskEither.tryCatch(
     () =>
       new Promise<void>((resolve, reject) => {
-        fs.futimes(fileDescriptor, accessTime, modifyTime, (e) =>
+        _fs.futimes(fileDescriptor, accessTime, modifyTime, (e) =>
           !e ? resolve() : reject(e)
         );
       }),

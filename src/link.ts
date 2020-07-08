@@ -1,29 +1,29 @@
 import { taskEither } from "fp-ts";
-import * as fs from "fs";
+import * as _fs from "fs";
 import { enforceErrnoException } from "./util";
 import { TaskEitherNode, ReaderTaskEitherNode } from "./util/types/fp";
 
 export function _link(
-  existingPath: fs.PathLike,
-  newPath: fs.PathLike
+  existingPath: _fs.PathLike,
+  newPath: _fs.PathLike
 ): TaskEitherNode {
   return taskEither.tryCatch(
     () =>
       new Promise((resolve, reject) => {
-        fs.link(existingPath, newPath, (e) => (!e ? resolve() : reject(e)));
+        _fs.link(existingPath, newPath, (e) => (!e ? resolve() : reject(e)));
       }),
     enforceErrnoException
   );
 }
 
 export function link(
-  existingPath: fs.PathLike,
-  newPath: fs.PathLike
+  existingPath: _fs.PathLike,
+  newPath: _fs.PathLike
 ): TaskEitherNode;
 
 export function link(
-  existingPath: fs.PathLike
-): ReaderTaskEitherNode<fs.PathLike>;
+  existingPath: _fs.PathLike
+): ReaderTaskEitherNode<_fs.PathLike>;
 
 /**
  * @summary
@@ -31,11 +31,11 @@ export function link(
  *
  * This means the newPath can be opened and it will take you to the existing path.
  */
-export function link(existingPath: fs.PathLike, b?: fs.PathLike) {
+export function link(existingPath: _fs.PathLike, b?: _fs.PathLike) {
   if (b === undefined) {
-    return (newPath: fs.PathLike) => _link(existingPath, newPath);
+    return (newPath: _fs.PathLike) => _link(existingPath, newPath);
   }
 
-  const newPath = b as fs.PathLike;
+  const newPath = b as _fs.PathLike;
   return _link(existingPath, newPath);
 }
