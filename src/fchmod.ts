@@ -1,10 +1,8 @@
 import { taskEither } from "fp-ts";
-import * as fs from "fs";
+import * as _fs from "fs";
 import { enforceErrnoException, FileDescriptor } from "./util";
 import { FilePermissions } from "./util/types/file-permissions";
-import { TaskEitherNode, ReaderTaskEitherNode } from "./util/types/fp";
-import { _chown } from "./chown";
-import { _chmod } from "./chmod";
+import { ReaderTaskEitherNode, TaskEitherNode } from "./util/types/fp";
 
 export function _fchmod(
   fileDescriptor: FileDescriptor,
@@ -13,7 +11,7 @@ export function _fchmod(
   return taskEither.tryCatch(
     () =>
       new Promise<void>((resolve, reject) => {
-        fs.fchmod(fileDescriptor, mode, (e) => {
+        _fs.fchmod(fileDescriptor, mode, (e) => {
           !e ? resolve() : reject(e);
         });
       }),
