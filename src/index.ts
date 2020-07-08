@@ -14,3 +14,4 @@ export { futimes } from "./futimes";
 export { lchmod } from "./lchmod";
 export { lchown } from "./lchown";
 export { link } from "./link";
+export { lstat } from "./lstat";
