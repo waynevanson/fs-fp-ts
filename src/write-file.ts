@@ -1,6 +1,3 @@
-/**
- * @since 0.0.0
- */
 import * as fs from "fs";
 import { taskEither } from "fp-ts";
 import {
@@ -9,17 +6,11 @@ import {
   FilePermissions,
 } from "./util";
 
-/**
- * @since 0.0.0
- */
 export type WriteFileOptions = {
   flags?: FileSystemFlags;
   mode?: FilePermissions;
 };
 
-/**
- * @since 0.0.0
- */
 export function writeFile<O extends WriteFileOptions>(options: O) {
   return <
     T extends fs.PathLike | number,

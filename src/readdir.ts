@@ -1,6 +1,3 @@
-/**
- * @since 0.0.0
- */
 import { taskEither } from "fp-ts";
 import * as fs from "fs";
 import { enforceErrnoException } from "./util";
@@ -20,9 +17,6 @@ function transformTypeToOptions(type: BufferEncoding | "Buffer" | "Dirent") {
   }
 }
 
-/**
- * @since 0.0.0
- */
 export function readdir<T extends "Buffer">(
   type: T
 ): <P extends fs.PathLike>(

@@ -1,7 +1,3 @@
-/**
- * @since 0.0.0
- */
-
 import { PartialKeys } from "./helper-types";
 
 /**

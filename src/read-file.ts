@@ -1,14 +1,8 @@
-/**
- * @since 0.0.0
- */
 import { taskEither } from "fp-ts";
 import * as fs from "fs";
 import { enforceErrnoException, FileSystemFlags } from "./util";
 import { TaskEither } from "fp-ts/lib/TaskEither";
 
-/**
- * @since 0.0.0
- */
 export function readFile<T extends "Buffer" | BufferEncoding = never>(
   encoding: T,
   flag?: FileSystemFlags
