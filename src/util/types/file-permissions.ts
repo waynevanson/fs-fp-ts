@@ -25,7 +25,7 @@
  * @since 0.0.0
  */
 
-export type FilePermissions =
+export type FileMode =
   | 0o000
   | 0o001
   | 0o002

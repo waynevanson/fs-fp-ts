@@ -1,12 +1,12 @@
 import * as _fs from "fs";
 import { taskEither as TE } from "fp-ts";
 import { enforceErrnoException } from "./util";
-import { FilePermissions } from "./util/types/file-permissions";
+import { FileMode } from "./util/types/file-permissions";
 import { ReaderTaskEitherNode, TaskEitherNode } from "./util/types/fp";
 
 export function _chmod(
   pathLike: _fs.PathLike,
-  permissions: FilePermissions
+  permissions: FileMode
 ): TaskEitherNode {
   return TE.tryCatch(
     () =>
@@ -19,14 +19,9 @@ export function _chmod(
   );
 }
 
-export function chmod(
-  permissions?: FilePermissions
-): ReaderTaskEitherNode<_fs.PathLike>;
+export function chmod(mode?: FileMode): ReaderTaskEitherNode<_fs.PathLike>;
 
-export function chmod(
-  pathLike: _fs.PathLike,
-  permissions?: FilePermissions
-): TaskEitherNode;
+export function chmod(pathLike: _fs.PathLike, mode?: FileMode): TaskEitherNode;
 
 /**
  * @summary
@@ -34,21 +29,21 @@ export function chmod(
  *
  * @param permissions defaults to `0o444`
  */
-export function chmod(a?: _fs.PathLike | FilePermissions, b?: FilePermissions) {
+export function chmod(a?: _fs.PathLike | FileMode, b?: FileMode) {
   // first overload
   if (a === undefined) {
-    const permissions: FilePermissions = 0o444;
-    return (pathLike: _fs.PathLike) => _chmod(pathLike, permissions);
+    const mode: FileMode = 0o444;
+    return (pathLike: _fs.PathLike) => _chmod(pathLike, mode);
   }
 
   // first overload
   if (b === undefined) {
-    const permissions = a as FilePermissions;
-    return (pathLike: _fs.PathLike) => _chmod(pathLike, permissions);
+    const mode = a as FileMode;
+    return (pathLike: _fs.PathLike) => _chmod(pathLike, mode);
   }
 
   // second overload
-  const permissions = b as FilePermissions;
   const pathLike = a as _fs.PathLike;
-  return _chmod(pathLike, permissions);
+  const mode = b as FileMode;
+  return _chmod(pathLike, mode);
 }

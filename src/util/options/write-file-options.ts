@@ -1,5 +1,5 @@
 import { FileAttributes } from "../types/file-attributes";
-import { FilePermissions } from "../types/file-permissions";
+import { FileMode } from "../types/file-permissions";
 
 /**
  * @summary
@@ -8,5 +8,5 @@ import { FilePermissions } from "../types/file-permissions";
 export type WriteFileOptions = {
   encoding?: BufferEncoding;
   flags?: FileAttributes;
-  mode?: FilePermissions;
+  mode?: FileMode;
 };
