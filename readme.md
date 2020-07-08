@@ -5,7 +5,12 @@
 Most are covered, but some are left out due to their immutable nature.
 We could cover this, but it's not a required feature for `v1.x`
 
-All node bindings that throw are caught and returned as `Right<NodeJS.ErrnoException, T>`
+## Goals
+
+- [ ] curried and partially applied implementations
+- [ ] provide coverage of all existing node.fs apis
+- [ ] additions, similar to fs-extra, to make complicated tasks easier.
+- [ ] offer different overloads, such as all in one (standard) and `reader<path>`
 
 ## Installation
 

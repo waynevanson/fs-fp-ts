@@ -1,19 +1,22 @@
-/**
- * @since 0.0.0
- */
 import { taskEither } from "fp-ts";
 import * as fs from "fs";
 import { enforceErrnoException } from "./util";
+import { FilePermissions } from "./util/types/file-permissions";
+import { ReaderTaskEitherNode } from "./util/types/fp";
 
 /**
- * @since 0.0.0
+ * @summary
+ * Changes the owner ship of a file.
  */
-export function chown<U extends number, G extends number>(uid: U, gid: G) {
-  return <T extends fs.PathLike>(path: T) =>
+export function chown(
+  uid: FilePermissions,
+  gid: FilePermissions
+): ReaderTaskEitherNode<fs.PathLike, void> {
+  return (path) =>
     taskEither.tryCatch(
       () =>
-        new Promise<T>((resolve, reject) => {
-          fs.chown(path, uid, gid, (e) => (!e ? resolve(path) : reject(e)));
+        new Promise<void>((resolve, reject) => {
+          fs.chown(path, uid, gid, (e) => (!e ? resolve() : reject(e)));
         }),
       enforceErrnoException
     );

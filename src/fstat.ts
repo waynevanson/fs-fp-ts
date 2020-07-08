@@ -2,20 +2,23 @@
  * @since 0.0.0
  */
 import { taskEither } from "fp-ts";
-import * as fs from "fs";
-import { enforceErrnoException } from "./util";
+import * as _fs from "fs";
+import { enforceErrnoException, FileDescriptor } from "./util";
+import { ReaderTaskEitherNode } from "./util/types/fp";
 
 /**
  * @since 0.0.0
  */
-export function fstat<T extends number>(fileDescriptor: T) {
+export const fstat: ReaderTaskEitherNode<FileDescriptor, _fs.Stats> = (
+  fileDescriptor
+) => {
   return taskEither.tryCatch(
     () =>
-      new Promise<fs.Stats>((resolve, reject) => {
-        fs.fstat(fileDescriptor, (e, stats) =>
+      new Promise<_fs.Stats>((resolve, reject) => {
+        _fs.fstat(fileDescriptor, (e, stats) =>
           !e ? resolve(stats) : reject(e)
         );
       }),
     enforceErrnoException
   );
-}
+};

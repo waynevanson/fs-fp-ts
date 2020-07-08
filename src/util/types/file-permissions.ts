@@ -1,55 +1,4 @@
 /**
- * @since 0.0.0
- */
-export type Time = string | number | Date;
-
-/**
- * @since 0.0.0
- */
-export type FileDescriptor = number;
-
-/**
- * @summary
- *
- *
- * @description
- *  - `a` - Open file for appending. The file is created if it does not exist.
- *  - `ax` - Like `a` but fails if the path exists.
- *  - `a+` - Open file for reading and appending.The file is created if it does not exist.
- *  - `ax+` - Like `a+` but fails if the path exists.
- *  - `as` - Open file for appending in synchronous mode. The file is created if it does not exist.
- *  - `as+` - Open file for reading and appending in synchronous mode. The file is created if it does not exist.
- *  - `r` - Open file for reading. An exception occurs if the file does not exist.
- *  - `r+` - Open file for reading and writing. An exception occurs if the file does not exist.
- *  - `rs+` - Open file for reading and writing in synchronous mode. Instructs the operating system to bypass the local file system cache.
- *  - `w` - Open file for writing. The file is created (if it does not exist) or truncated (if it exists).
- *  - `wx` - Like `w` but fails if the path exists.
- *  - `w+` - Open file for reading and writing. The file is created (if it does not exist) or truncated (if it exists).
- *  - `wx+` - Like `w+` but fails if the path exists.
- *
- * @todo
- * Create a separate type for each string literal so each has a description on hover.
- * A quick test proved that this doesn't work the way I expected it to.
- *
- *
- * @since 0.0.0
- */
-export type FileSystemFlags =
-  | "a"
-  | "ax"
-  | "a+"
-  | "ax+"
-  | "as"
-  | "as+"
-  | "r"
-  | "r+"
-  | "rs+"
-  | "w"
-  | "wx"
-  | "w+"
-  | "wx+";
-
-/**
  * @summary
  * A range of numbers between `0o000` and `0o777`, which
  * are used in the `MODE` argument of `chmod` and `chown`.
@@ -75,7 +24,8 @@ export type FileSystemFlags =
  *
  * @since 0.0.0
  */
-export type Permissions =
+
+export type FilePermissions =
   | 0o000
   | 0o001
   | 0o002

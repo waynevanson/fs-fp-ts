@@ -1,21 +1,20 @@
 /**
  * @since 0.0.0
  */
-import * as fs from "fs";
-import * as access from "./access";
-import { pipe } from "fp-ts/lib/pipeable";
-import { taskEither, task } from "fp-ts";
+import { reader as R, task as T, taskEither } from "fp-ts";
+import { flow } from "fp-ts/lib/function";
+import * as _fs from "fs";
+import { access } from "./access";
 
 /**
- * @since 0.0.0
+ * @summary
+ * Returns a boolean if the path exists.
+ * If false should be an error for your code, use `access` instead.
  */
-export function exists<P extends fs.PathLike>(pathLike: P) {
-  return pipe(
-    pathLike,
-    access.access("visible"),
-    taskEither.fold(
-      () => task.of(false),
-      () => task.of(true)
-    )
-  );
-}
+export const exists: R.Reader<_fs.PathLike, T.Task<boolean>> = flow(
+  access(["visible"]),
+  taskEither.fold(
+    () => T.of(false),
+    () => T.of(true)
+  )
+);

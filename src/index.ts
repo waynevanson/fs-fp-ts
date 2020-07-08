@@ -1,6 +1,3 @@
-/**
- * @since 0.0.0
- */
 export * from "./access";
 export * from "./append-file";
 export * from "./chmod";

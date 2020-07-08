@@ -7,8 +7,7 @@
   "description": "fp-ts bindings for the Node File System (FS) API",
   "homepage": "https://waynevanson.github.io/fs-fp-ts",
   "repository": {
-    "url": "http://github.com/waynevanson/fs-fp-ts",
-    "type": "github"
+    "url": "http://github.com/waynevanson/fs-fp-ts"
   },
   "main": "dist/esm/index.js",
   "module": "dist/esm/index.js",
@@ -25,17 +24,17 @@
     "fp-ts": "^2.6.0"
   },
   "devDependencies": {
-    "@types/jest": "^25.2.2",
-    "@types/node": "^14.0.1",
-    "@types/prettier": "^2.0.0",
-    "fp-ts": "^2.6.0",
-    "jest": "^26.0.1",
+    "@types/jest": "^26.0.4",
+    "@types/node": "^14.0.19",
+    "@types/prettier": "^2.0.2",
+    "fp-ts": "^2.7.0",
+    "jest": "^26.1.0",
     "prettier": "^2.0.5",
-    "ts-jest": "^25.5.1",
-    "ts-node": "^8.10.1",
-    "typescript": "^3.9.2"
+    "ts-jest": "^26.1.1",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.6"
   },
   "dependencies": {
-    "docs-ts": "^0.4.0"
+    "docs-ts": "^0.5.1"
   }
 }

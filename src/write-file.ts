@@ -3,14 +3,18 @@
  */
 import * as fs from "fs";
 import { taskEither } from "fp-ts";
-import { enforceErrnoException, FileSystemFlags, Permissions } from "./util";
+import {
+  enforceErrnoException,
+  FileSystemFlags,
+  FilePermissions,
+} from "./util";
 
 /**
  * @since 0.0.0
  */
 export type WriteFileOptions = {
   flags?: FileSystemFlags;
-  mode?: Permissions;
+  mode?: FilePermissions;
 };
 
 /**

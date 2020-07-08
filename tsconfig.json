@@ -2,7 +2,9 @@
   "compilerOptions": {
     "module": "commonjs",
     "outDir": "dist/esm",
-    "declaration": true
+    "declaration": true,
+    "strict": true,
+    "alwaysStrict": true
   },
   "include": ["src"]
 }

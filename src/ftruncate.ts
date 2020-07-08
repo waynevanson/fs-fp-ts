@@ -3,18 +3,22 @@
  */
 import { taskEither } from "fp-ts";
 import * as fs from "fs";
-import { enforceErrnoException } from "./util";
+import { enforceErrnoException, FileDescriptor } from "./util";
+import { ReaderTaskEitherNode } from "./util/types/fp";
 
 /**
- * @since 0.0.0
+ *
+ * @param length default is 0
  */
-export function ftruncate<N extends number>(length: N) {
-  return <T extends number>(fileDescriptor: T) =>
+export function ftruncate(
+  length?: number
+): ReaderTaskEitherNode<FileDescriptor> {
+  return (fileDescriptor) =>
     taskEither.tryCatch(
       () =>
-        new Promise<T>((resolve, reject) => {
-          fs.ftruncate(fileDescriptor, (e) =>
-            !e ? resolve(fileDescriptor) : reject(e)
+        new Promise((resolve, reject) => {
+          fs.ftruncate(fileDescriptor, length, (e) =>
+            !e ? resolve() : reject(e)
           );
         }),
       enforceErrnoException
