@@ -6,3 +6,8 @@ export { close } from "./close";
 export { CopyFileOptions, copyFile } from "./copy-file";
 export { fchmod } from "./fchmod";
 export { fchown } from "./fchown";
+export { fdatasync } from "./fdatasync";
+export { fstat } from "./fstat";
+export { fsync } from "./fsync";
+export { TruncateOptions, ftruncate } from "./ftruncate";
+export { futimes } from "./futimes";
