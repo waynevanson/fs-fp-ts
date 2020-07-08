@@ -18,3 +18,4 @@ export { lstat } from "./lstat";
 export { lutimes } from "./lutimes";
 export { mkdir } from "./mkdir";
 export { mkdtemp, BufferEncodingOrBuffer } from "./mkdtemp";
+export { open } from "./open";
