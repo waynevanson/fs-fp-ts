@@ -52,18 +52,18 @@ export function writeFile(
 
   // first overload
   if (b === undefined) {
-    const options = a as WriteFileOptions;
-    return (data: WritableValue) => (
-      pathLikeOrFileDescriptor: PathLikeOrFileDescriptor
-    ) => _writeFile(pathLikeOrFileDescriptor, data, options);
+    const data = a as WritableValue;
+    const options: WriteFileOptions = {};
+    return (pathLikeOrFileDescriptor: PathLikeOrFileDescriptor) =>
+      _writeFile(pathLikeOrFileDescriptor, data, options);
   }
 
   if (c === undefined) {
-    const data = a as WritableValue;
-    const options = b as WriteFileOptions;
+    const pathLikeOrFileDescriptor = a as PathLikeOrFileDescriptor;
+    const data = b as WritableValue;
+    const options: WriteFileOptions = {};
 
-    return (pathLikeOrFileDescriptor: PathLikeOrFileDescriptor) =>
-      _writeFile(pathLikeOrFileDescriptor, data, options);
+    return _writeFile(pathLikeOrFileDescriptor, data, options);
   }
 
   const pathLikeOrFileDescriptor = a as PathLikeOrFileDescriptor;
