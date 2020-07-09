@@ -19,5 +19,6 @@ export { lutimes } from "./lutimes";
 export { mkdir } from "./mkdir";
 export { mkdtemp, MkdTempInput } from "./mkdtemp";
 export { open } from "./open";
-export { readdir, ReadDirInput } from "./readdir";
 export { readFile } from "./read-file";
+export { readdir, ReadDirInput } from "./readdir";
+export { WritableValue, writeFile } from "./write-file";
