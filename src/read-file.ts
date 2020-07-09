@@ -9,7 +9,7 @@ import {
 import { FileAttributes } from "./util/types/file-attributes";
 import { ReaderTaskEitherNode, TaskEitherNode } from "./util/types/fp";
 
-export function _read<T extends MkdTempInput>(
+export function _readFile<T extends MkdTempInput>(
   pathLikeOrFileDescriptor: PathLikeOrFileDescriptor,
   type: T,
   // fix name
@@ -27,18 +27,18 @@ export function _read<T extends MkdTempInput>(
   );
 }
 
-export function read<T extends MkdTempInput>(
+export function readFile<T extends MkdTempInput>(
   type: T,
   flag?: FileAttributes
 ): ReaderTaskEitherNode<_fs.PathLike | FileDescriptor, MkdTempResult<T>>;
 
-export function read<T extends MkdTempInput>(
+export function readFile<T extends MkdTempInput>(
   pathLikeOrFileDescriptor: PathLikeOrFileDescriptor,
   type: T,
   flag?: FileAttributes
 ): TaskEitherNode<MkdTempResult<T>>;
 
-export function read<T extends MkdTempInput>(
+export function readFile<T extends MkdTempInput>(
   a: T | PathLikeOrFileDescriptor,
   b?: FileAttributes | T,
   c?: FileAttributes
@@ -47,7 +47,7 @@ export function read<T extends MkdTempInput>(
   if (b === undefined) {
     const type = a as T;
     return (pathLikeOrFileDescriptor: PathLikeOrFileDescriptor) =>
-      _read(pathLikeOrFileDescriptor, type);
+      _readFile(pathLikeOrFileDescriptor, type);
   }
 
   // first overload
@@ -55,11 +55,11 @@ export function read<T extends MkdTempInput>(
     const type = a as T;
     const flag = b as FileAttributes;
     return (pathLikeOrFileDescriptor: PathLikeOrFileDescriptor) =>
-      _read(pathLikeOrFileDescriptor, type, flag);
+      _readFile(pathLikeOrFileDescriptor, type, flag);
   }
 
   const pathLikeOrFileDescriptor = a as PathLikeOrFileDescriptor;
   const type = b as T;
   const flag = c as FileAttributes;
-  return _read(pathLikeOrFileDescriptor, type, flag);
+  return _readFile(pathLikeOrFileDescriptor, type, flag);
 }

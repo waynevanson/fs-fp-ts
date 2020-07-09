@@ -20,4 +20,4 @@ export { mkdir } from "./mkdir";
 export { mkdtemp, MkdTempInput } from "./mkdtemp";
 export { open } from "./open";
 export { readdir, ReadDirInput } from "./readdir";
-export { read } from "./read-file";
+export { readFile } from "./read-file";
