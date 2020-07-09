@@ -3,7 +3,7 @@ import * as fs from "fs";
 import { enforceErrnoException } from "./util";
 import { TaskEitherNode } from "./util/types/fp";
 
-export function _mkdtemp(prefix: string, as: BufferEncodingOrBuffer) {
+export function _mkdtemp(prefix: string, as: MkdTempInput) {
   const encoding = as === "Buffer" ? null : as;
   return TE.tryCatch(
     () =>
@@ -16,22 +16,22 @@ export function _mkdtemp(prefix: string, as: BufferEncodingOrBuffer) {
   );
 }
 
-export type BufferEncodingOrBuffer = BufferEncoding | "Buffer";
+export type MkdTempInput = BufferEncoding | "Buffer";
 
-export type CreateBufferOrString<
-  T extends BufferEncodingOrBuffer
-> = T extends "Buffer" ? Buffer : string;
+export type MkdTempResult<T extends MkdTempInput> = T extends "Buffer"
+  ? Buffer
+  : string;
 
-export function mkdtemp<T extends BufferEncodingOrBuffer>(
+export function mkdtemp<T extends MkdTempInput>(
   as?: BufferEncoding | "Buffer"
-): (prefix: string) => TaskEitherNode<CreateBufferOrString<T>>;
+): (prefix: string) => TaskEitherNode<MkdTempResult<T>>;
 
-export function mkdtemp<T extends BufferEncodingOrBuffer>(
+export function mkdtemp<T extends MkdTempInput>(
   prefix: string,
   as?: BufferEncoding | "Buffer"
-): TaskEitherNode<CreateBufferOrString<T>>;
+): TaskEitherNode<MkdTempResult<T>>;
 
-export function mkdtemp<T extends BufferEncodingOrBuffer = "Buffer">(
+export function mkdtemp<T extends MkdTempInput = "Buffer">(
   a?: T | string,
   b?: T
 ) {

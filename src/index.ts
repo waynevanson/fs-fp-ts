@@ -17,6 +17,6 @@ export { link } from "./link";
 export { lstat } from "./lstat";
 export { lutimes } from "./lutimes";
 export { mkdir } from "./mkdir";
-export { mkdtemp, BufferEncodingOrBuffer } from "./mkdtemp";
+export { mkdtemp, MkdTempInput } from "./mkdtemp";
 export { open } from "./open";
 export { ReadDirInput, readdir } from "./readdir";
