@@ -1,17 +1,8 @@
 import * as fs from "fs";
 import { taskEither } from "fp-ts";
-import {
-  enforceErrnoException,
-  FileSystemFlags,
-  FilePermissions,
-} from "./util";
+import { enforceErrnoException } from "./util";
 
-export type WriteFileOptions = {
-  flags?: FileSystemFlags;
-  mode?: FilePermissions;
-};
-
-export function writeFile<O extends WriteFileOptions>(options: O) {
+export function writeFile(options: any) {
   return <
     T extends fs.PathLike | number,
     U extends string | NodeJS.ArrayBufferView
@@ -21,9 +12,9 @@ export function writeFile<O extends WriteFileOptions>(options: O) {
   ) => {
     return taskEither.tryCatch(
       () =>
-        new Promise<T>((resolve, reject) => {
+        new Promise((resolve, reject) => {
           fs.writeFile(path, data, options, (e) =>
-            !e ? resolve(path) : reject(e)
+            !e ? resolve() : reject(e)
           );
         }),
       enforceErrnoException
