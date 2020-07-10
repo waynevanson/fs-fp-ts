@@ -22,3 +22,4 @@ export { open } from "./open";
 export { readFile } from "./read-file";
 export { readdir, ReadDirInput } from "./readdir";
 export { WritableValue, writeFile } from "./write-file";
+export { unlink } from "./unlink";

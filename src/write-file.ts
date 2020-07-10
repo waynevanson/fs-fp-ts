@@ -63,7 +63,8 @@ export function writeFile(
     const data = b as WritableValue;
     const options: WriteFileOptions = {};
 
-    return _writeFile(pathLikeOrFileDescriptor, data, options);
+    return (pathLikeOrFileDescriptor: PathLikeOrFileDescriptor) =>
+      _writeFile(pathLikeOrFileDescriptor, data, options);
   }
 
   const pathLikeOrFileDescriptor = a as PathLikeOrFileDescriptor;
