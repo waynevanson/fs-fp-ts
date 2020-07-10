@@ -1,12 +1,13 @@
 import * as fs from "fs";
 import { taskEither } from "fp-ts";
 import { enforceErrnoException } from "./util";
+import { TaskEitherNode } from "./util/types/fp";
 
-export function unlink<P extends fs.PathLike>(path: P) {
+export function unlink(path: fs.PathLike): TaskEitherNode {
   return taskEither.tryCatch(
     () =>
-      new Promise<P>((resolve, reject) => {
-        fs.unlink(path, (e) => (!e ? resolve(path) : reject(e)));
+      new Promise<void>((resolve, reject) => {
+        fs.unlink(path, (e) => (!e ? resolve() : reject(e)));
       }),
     enforceErrnoException
   );
