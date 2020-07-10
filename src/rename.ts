@@ -1,13 +1,7 @@
-/**
- * @since 0.0.0
- */
 import { taskEither } from "fp-ts";
 import * as fs from "fs";
 import { enforceErrnoException } from "./util";
 
-/**
- * @since 0.0.0
- */
 export function rename<N extends fs.PathLike, O extends fs.PathLike>(
   f: (currentPath: O) => N
 ) {

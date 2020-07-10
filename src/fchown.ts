@@ -4,14 +4,16 @@ import { enforceErrnoException, FileDescriptor } from "./util";
 import { ReaderTaskEitherNode, TaskEitherNode } from "./util/types/fp";
 
 export function _fchown(
-  pathLike: FileDescriptor,
+  fileDescriptor: FileDescriptor,
   uid: number,
   gid: number
 ): TaskEitherNode {
   return TE.tryCatch(
     () =>
       new Promise<void>((resolve, reject) => {
-        _fs.fchown(pathLike, uid, gid, (e) => (!e ? resolve() : reject(e)));
+        _fs.fchown(fileDescriptor, uid, gid, (e) =>
+          !e ? resolve() : reject(e)
+        );
       }),
     enforceErrnoException
   );
@@ -32,7 +34,7 @@ export function fchown(
  * @summary
  * Changes the owner ship of a file.
  */
-export function fchown(a: FileDescriptor, b: number, c?: number) {
+export function fchown(a: FileDescriptor | number, b: number, c?: number) {
   if (c === undefined) {
     const uid = a as number;
     const gid = b as number;

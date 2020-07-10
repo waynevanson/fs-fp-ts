@@ -1,6 +1,3 @@
-/**
- * @since 0.0.0
- */
 import { taskEither } from "fp-ts";
 import * as _fs from "fs";
 import { enforceErrnoException, FileDescriptor } from "./util";
