@@ -86,8 +86,9 @@ export function access<U extends AccessMode>(
 
   // first overload
   if (b === undefined) {
-    const options = a as EnforceNonEmptyArray<U[]>;
-    return (pathLike: _fs.PathLike) => _access(pathLike, options);
+    const pathLike = a as _fs.PathLike;
+    const options = ["visible"] as EnforceNonEmptyArray<U[]>;
+    return _access(pathLike, options);
   }
 
   // second overload

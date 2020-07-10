@@ -52,10 +52,9 @@ export function readFile<T extends MkdTempInput>(
 
   // first overload
   if (c === undefined) {
-    const type = a as T;
-    const flag = b as FileAttributes;
-    return (pathLikeOrFileDescriptor: PathLikeOrFileDescriptor) =>
-      _readFile(pathLikeOrFileDescriptor, type, flag);
+    const pathLikeOrFileDescriptor = a as PathLikeOrFileDescriptor;
+    const type = b as T;
+    return _readFile(pathLikeOrFileDescriptor, type);
   }
 
   const pathLikeOrFileDescriptor = a as PathLikeOrFileDescriptor;
