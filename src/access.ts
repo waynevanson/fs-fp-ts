@@ -1,7 +1,7 @@
 import { array as A, eq as EQ, taskEither as TE } from "fp-ts";
 import { pipe } from "fp-ts/lib/pipeable";
 import * as _fs from "fs";
-import { enforceErrnoException, EnforceNonEmptyArray } from "./util";
+import { enforceErrnoException, EnforceNonEmptyArray, isOptions } from "./util";
 import { ReaderTaskEitherNode, TaskEitherNode } from "./util/types/fp";
 
 /**
@@ -27,6 +27,10 @@ export function getAccessMode(mode: AccessMode) {
   }
 }
 
+export type AccessOptions<U extends AccessMode> = {
+  mode?: EnforceNonEmptyArray<U[]>;
+};
+
 /**
  * Uniquify and reduce the access modes into a number that fs can handle.
  */
@@ -41,7 +45,7 @@ export function transformAccessModes(modes: AccessMode[] = ["visible"]) {
 
 export function _access<U extends AccessMode>(
   pathLike: _fs.PathLike,
-  modes: EnforceNonEmptyArray<U[]>
+  modes: AccessOptions<U> = { mode: ["visible" as U] }
 ) {
   const newModes = transformAccessModes(modes);
   return TE.tryCatch(
@@ -56,12 +60,12 @@ export function _access<U extends AccessMode>(
 }
 
 export function access<U extends AccessMode>(
-  modes?: EnforceNonEmptyArray<U[]>
+  modes?: AccessOptions<U>
 ): ReaderTaskEitherNode<_fs.PathLike>;
 
 export function access<U extends AccessMode>(
   pathLike: _fs.PathLike,
-  modes?: EnforceNonEmptyArray<U[]>
+  modes?: AccessOptions<U>
 ): TaskEitherNode;
 
 /**
@@ -76,22 +80,16 @@ export function access<U extends AccessMode>(
  * @todo uniquify `modes` arguments at type level, like in `LensFromPath` for `monocle-ts`
  */
 export function access<U extends AccessMode>(
-  a?: EnforceNonEmptyArray<U[]> | _fs.PathLike,
-  b?: EnforceNonEmptyArray<U[]>
+  a?: AccessOptions<U> | _fs.PathLike,
+  b?: AccessOptions<U>
 ) {
   // first overload
-  if (a === undefined) {
-    return (pathLike: _fs.PathLike) => _access(pathLike, ["visible"]);
-  }
-
-  // first overload
-  if (b === undefined) {
-    const pathLike = a as _fs.PathLike;
-    const options = ["visible"] as EnforceNonEmptyArray<U[]>;
-    return (pathLike: _fs.PathLike) => _access(pathLike, options);
+  if (isOptions(a)) {
+    return (pathLike: _fs.PathLike) => _access(pathLike, a);
   }
 
   // second overload
-  const pathLike = a as _fs.PathLike;
-  return _access(pathLike, b);
+  if (isOptions(b)) {
+    return _access(a, b);
+  }
 }
