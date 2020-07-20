@@ -8,17 +8,12 @@ import {
 import { pipe } from "fp-ts/lib/function";
 import * as path from "path";
 import * as fs from ".";
-import { fixturesDir } from "../test-utils";
+import { fixturesDir, FileArgsDeps, rWriteFile, rUnlink } from "../test-utils";
 import { TaskEitherNode } from "./util/types/fp";
-
-export interface ReadFileArgs {
-  dir: string;
-  content: string;
-}
 
 const tableBuffer: Array<{
   name: string;
-  property: (deps: ReadFileArgs) => TaskEitherNode<Buffer>;
+  property: (deps: FileArgsDeps) => TaskEitherNode<Buffer>;
 }> = [
   {
     name: "overload one without options returns a buffer",
@@ -39,22 +34,12 @@ const tableBuffer: Array<{
   },
 ];
 
-const rUnlink = pipe(
-  RTE.asks((deps: ReadFileArgs) => deps.dir),
-  R.map(TE.chain(fs.unlink))
-);
-
-const rWriteFile = pipe(
-  RTE.ask<ReadFileArgs>(),
-  R.map(TE.chain(({ dir, content }) => fs.writeFile(dir, content)))
-);
-
 /**
  * @summary
  * This is basically the buildup and teardown,
  * and rReadFile is injectable!
  */
-const subject = <T>(rReadFile: (deps: ReadFileArgs) => TaskEitherNode<T>) =>
+const subject = <T>(rReadFile: (deps: FileArgsDeps) => TaskEitherNode<T>) =>
   pipe(
     rWriteFile,
     RTE.chain(() => rReadFile),
@@ -81,7 +66,7 @@ describe.each(tableBuffer)(fs.readFile.name, ({ name, property }) => {
 
 const tableString: Array<{
   name: string;
-  property: (deps: ReadFileArgs) => TaskEitherNode<string>;
+  property: (deps: FileArgsDeps) => TaskEitherNode<string>;
 }> = [
   {
     name: "overload two with options returns a string",
