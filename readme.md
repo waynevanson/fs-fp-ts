@@ -36,3 +36,7 @@ Any node stream API has been left out.
 
 - read
 - opendir
+
+## Tests
+
+The purpose of the tests is to check if the overloads work correctly.

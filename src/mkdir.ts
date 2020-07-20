@@ -1,8 +1,8 @@
-import { taskEither, option } from "fp-ts";
+import { taskEither } from "fp-ts";
 import * as fs from "fs";
 import { enforceErrnoException } from "./util";
-import { TaskEitherNode, ReaderTaskEitherNode } from "./util/types/fp";
-import { MakeDirectoryOptions } from "./util/options/make-directory-options";
+import { ReaderTaskEitherNode, TaskEitherNode } from "./util/types/fp";
+import { MakeDirectoryOptions } from "./util/types/options";
 
 export function _mkdir(
   pathLike: fs.PathLike,

@@ -25,7 +25,7 @@
  * A quick test proved that this doesn't work the way I expected it to.
  *
  */
-export type FileAttributes =
+export type Flags =
   | "a"
   | "ax"
   | "a+"

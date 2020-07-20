@@ -1,15 +1,18 @@
 import * as fs from "fs";
 import { taskEither } from "fp-ts";
-import { enforceErrnoException, PathLikeOrFileDescriptor } from "./util";
-import { WriteFileOptions } from "./util/options/write-file-options";
+import {
+  enforceErrnoException,
+  PathLikeOrFileDescriptor,
+  isOptions,
+} from "./util";
 import { TaskEitherNode, ReaderTaskEitherNode } from "./util/types/fp";
 
-export type WritableValue = string | NodeJS.ArrayBufferView;
+export type WritableData = string | NodeJS.ArrayBufferView;
 
 export function _writeFile(
   pathLikeOrFileDescriptor: PathLikeOrFileDescriptor,
-  data: WritableValue,
-  options: WriteFileOptions
+  data: WritableData,
+  options: fs.WriteFileOptions
 ): TaskEitherNode {
   return taskEither.tryCatch(
     () =>
@@ -23,52 +26,47 @@ export function _writeFile(
 }
 
 export function writeFile(
-  options?: WriteFileOptions
-): (data: WritableValue) => ReaderTaskEitherNode<PathLikeOrFileDescriptor>;
-
-export function writeFile(
-  data: WritableValue,
-  options?: WriteFileOptions
-): ReaderTaskEitherNode<PathLikeOrFileDescriptor>;
-
-export function writeFile(
   pathLikeOrFileDescriptor: PathLikeOrFileDescriptor,
-  data: WritableValue,
-  options?: WriteFileOptions
+  data: WritableData,
+  options?: fs.WriteFileOptions
 ): TaskEitherNode;
 
 export function writeFile(
-  a?: WriteFileOptions | WritableValue | PathLikeOrFileDescriptor,
-  b?: WriteFileOptions | WritableValue,
-  c?: WriteFileOptions
+  data: WritableData,
+  options?: fs.WriteFileOptions
+): ReaderTaskEitherNode<PathLikeOrFileDescriptor>;
+
+export function writeFile(
+  options?: fs.WriteFileOptions
+): (data: WritableData) => ReaderTaskEitherNode<PathLikeOrFileDescriptor>;
+
+export function writeFile(
+  a?: fs.WriteFileOptions | WritableData | PathLikeOrFileDescriptor,
+  b?: fs.WriteFileOptions | WritableData,
+  c?: fs.WriteFileOptions
 ) {
   // first overload
-  if (a === undefined) {
-    const options: WriteFileOptions = {};
-    return (data: WritableValue) => (
+  if (isOptions(a)) {
+    const options = a ?? {};
+    return (data: WritableData) => (
       pathLikeOrFileDescriptor: PathLikeOrFileDescriptor
     ) => _writeFile(pathLikeOrFileDescriptor, data, options);
   }
 
-  // first overload
-  if (b === undefined) {
-    const data = a as WritableValue;
-    const options: WriteFileOptions = {};
+  // second overload
+  if (isOptions(b)) {
+    const data = a as WritableData;
+    const options = b ?? {};
     return (pathLikeOrFileDescriptor: PathLikeOrFileDescriptor) =>
       _writeFile(pathLikeOrFileDescriptor, data, options);
   }
 
-  if (c === undefined) {
+  // third overload
+  if (isOptions(c)) {
     const pathLikeOrFileDescriptor = a as PathLikeOrFileDescriptor;
-    const data = b as WritableValue;
-    const options: WriteFileOptions = {};
+    const data = b as WritableData;
+    const options: fs.WriteFileOptions = c ?? {};
 
-    return (pathLikeOrFileDescriptor: PathLikeOrFileDescriptor) =>
-      _writeFile(pathLikeOrFileDescriptor, data, options);
+    return _writeFile(pathLikeOrFileDescriptor, data, options);
   }
-
-  const pathLikeOrFileDescriptor = a as PathLikeOrFileDescriptor;
-  const data = b as WritableValue;
-  const options = c as WriteFileOptions;
-  return _writeFile(pathLikeOrFileDescriptor, data, options);
 }

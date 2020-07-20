@@ -1,64 +1,57 @@
 import { taskEither as TE } from "fp-ts";
 import * as _fs from "fs";
-import { MkdTempInput, MkdTempResult } from "./mkdtemp";
 import {
   enforceErrnoException,
-  FileDescriptor,
+  isOptions,
   PathLikeOrFileDescriptor,
 } from "./util";
-import { FileAttributes } from "./util/types/file-attributes";
 import { ReaderTaskEitherNode, TaskEitherNode } from "./util/types/fp";
+import { BufferOrStringOptions } from "./util/types/options";
 
-export function _readFile<T extends MkdTempInput>(
+export function _readFile<E extends BufferEncoding>(
   pathLikeOrFileDescriptor: PathLikeOrFileDescriptor,
-  type: T,
-  // fix name
-  flag?: FileAttributes
-): TaskEitherNode<MkdTempResult<T>> {
-  const encoding = type === "Buffer" ? null : (type as BufferEncoding);
+  options: BufferOrStringOptions<E>
+): TaskEitherNode<BufferOrStringResult<E>> {
+  const encoding = options.encoding === undefined ? null : options.encoding;
+
   return TE.tryCatch(
     () =>
       new Promise((resolve, reject) => {
-        _fs.readFile(pathLikeOrFileDescriptor, { flag, encoding }, (e, data) =>
-          !e ? resolve(data as MkdTempResult<T>) : reject(e)
+        _fs.readFile(
+          pathLikeOrFileDescriptor,
+          { flag: options.flag, encoding },
+          (e, data) => (!e ? resolve(data as any) : reject(e))
         );
       }),
     enforceErrnoException
   );
 }
 
-export function readFile<T extends MkdTempInput>(
-  type: T,
-  flag?: FileAttributes
-): ReaderTaskEitherNode<_fs.PathLike | FileDescriptor, MkdTempResult<T>>;
+export type BufferOrStringResult<E extends BufferEncoding> = E extends never
+  ? Buffer
+  : string;
 
-export function readFile<T extends MkdTempInput>(
+export function readFile<E extends BufferEncoding = never>(
+  options?: BufferOrStringOptions<E>
+): ReaderTaskEitherNode<PathLikeOrFileDescriptor, BufferOrStringResult<E>>;
+
+export function readFile<E extends BufferEncoding = never>(
   pathLikeOrFileDescriptor: PathLikeOrFileDescriptor,
-  type: T,
-  flag?: FileAttributes
-): TaskEitherNode<MkdTempResult<T>>;
+  options?: BufferOrStringOptions<E>
+): TaskEitherNode<BufferOrStringResult<E>>;
 
-export function readFile<T extends MkdTempInput>(
-  a: T | PathLikeOrFileDescriptor,
-  b?: FileAttributes | T,
-  c?: FileAttributes
+export function readFile<E extends BufferEncoding = never>(
+  a?: PathLikeOrFileDescriptor | BufferOrStringOptions<E>,
+  b?: BufferOrStringOptions<E>
 ) {
   // first overload
-  if (b === undefined) {
-    const type = a as T;
-    return (pathLikeOrFileDescriptor: PathLikeOrFileDescriptor) =>
-      _readFile(pathLikeOrFileDescriptor, type);
+  if (isOptions(a)) {
+    const options = a ?? ({} as BufferOrStringOptions<E>);
+    return (z: PathLikeOrFileDescriptor) => _readFile(z, options);
   }
 
-  // first overload
-  if (c === undefined) {
-    const pathLikeOrFileDescriptor = a as PathLikeOrFileDescriptor;
-    const type = b as T;
-    return _readFile(pathLikeOrFileDescriptor, type);
+  if (isOptions(b)) {
+    const options = b ?? ({} as BufferOrStringOptions<E>);
+    return _readFile(a as Exclude<typeof a, BufferOrStringOptions<E>>, options);
   }
-
-  const pathLikeOrFileDescriptor = a as PathLikeOrFileDescriptor;
-  const type = b as T;
-  const flag = c as FileAttributes;
-  return _readFile(pathLikeOrFileDescriptor, type, flag);
 }

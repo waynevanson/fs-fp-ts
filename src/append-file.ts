@@ -1,8 +1,8 @@
 import { taskEither as TE } from "fp-ts";
 import * as _fs from "fs";
 import { enforceErrnoException, FileDescriptor } from "./util";
-import { WriteFileOptions } from "./util/options/write-file-options";
 import { ReaderTaskEitherNode, TaskEitherNode } from "./util/types/fp";
+import { WriteFileOptions } from "./util/types/options";
 
 export function _appendFile(
   pathLikeOrFileDescriptor: _fs.PathLike | FileDescriptor,
