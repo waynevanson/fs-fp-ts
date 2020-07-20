@@ -12,11 +12,6 @@ import {
 } from "../test-utils";
 import { TaskEitherNode } from "./util/types/fp";
 
-/**
- * @summary
- * This is basically the buildup and teardown,
- * and rReadFile is injectable!
- */
 const subject = <T>(rAppendFile: (deps: FileArgsDeps) => TaskEitherNode<T>) =>
   pipe(
     rWriteFile,
