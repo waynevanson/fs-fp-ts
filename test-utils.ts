@@ -17,7 +17,7 @@ export const rWriteFile = pipe(
 
 export const rReadFile = pipe(
   RTE.asks((deps: FileArgsDeps) => deps.dir),
-  R.map(TE.chain(fs.readFile()))
+  R.map(TE.chain(fs.readFile({ encoding: "utf8" })))
 );
 
 export const rUnlink = pipe(
