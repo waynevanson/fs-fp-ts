@@ -45,9 +45,9 @@ export function transformAccessModes(modes: AccessMode[] = ["visible"]) {
 
 export function _access<U extends AccessMode>(
   pathLike: _fs.PathLike,
-  modes: AccessOptions<U> = { mode: ["visible" as U] }
+  options: AccessOptions<U> = { mode: ["visible" as U] }
 ) {
-  const newModes = transformAccessModes(modes);
+  const newModes = transformAccessModes(options.mode);
   return TE.tryCatch(
     () =>
       new Promise<void>((resolve, reject) => {
