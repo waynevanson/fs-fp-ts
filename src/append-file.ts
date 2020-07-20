@@ -1,13 +1,13 @@
 import { taskEither as TE } from "fp-ts";
 import * as _fs from "fs";
-import { enforceErrnoException, FileDescriptor } from "./util";
+import { enforceErrnoException, FileDescriptor, isOptions } from "./util";
 import { ReaderTaskEitherNode, TaskEitherNode } from "./util/types/fp";
 import { WriteFileOptions } from "./util/types/options";
 
 export function _appendFile(
   pathLikeOrFileDescriptor: _fs.PathLike | FileDescriptor,
   data: string | Uint8Array,
-  options: WriteFileOptions
+  options: WriteFileOptions = {}
 ): TaskEitherNode {
   return TE.tryCatch(
     () =>
@@ -47,30 +47,23 @@ export function appendFile(
   c?: WriteFileOptions
 ) {
   // first overload
-  if (a === undefined) {
+  if (isOptions(a)) {
     return (data: string | Uint8Array) => (
       pathLikeOrFileDescriptor: _fs.PathLike | FileDescriptor
-    ) => _appendFile(pathLikeOrFileDescriptor, data, {});
-  }
-
-  // first overload
-  if (b === undefined) {
-    return (data: string | Uint8Array) => (
-      pathLikeOrFileDescriptor: _fs.PathLike | FileDescriptor
-    ) => _appendFile(pathLikeOrFileDescriptor, data, a as WriteFileOptions);
+    ) => _appendFile(pathLikeOrFileDescriptor, data, a);
   }
 
   // second overload
-  if (c === undefined) {
-    const data = b as string | Uint8Array;
+  if (isOptions(b)) {
+    const data = a as string | Uint8Array;
     return (pathLikeOrFileDescriptor: _fs.PathLike | FileDescriptor) =>
-      _appendFile(pathLikeOrFileDescriptor, data, a as WriteFileOptions);
+      _appendFile(pathLikeOrFileDescriptor, data, b);
   }
 
   // third overload
-  const data = b as string | Uint8Array;
-  const options = c as WriteFileOptions;
-  const pathLikeOrFileDescriptor = a as _fs.PathLike | FileDescriptor;
-
-  return _appendFile(pathLikeOrFileDescriptor, data, options);
+  if (isOptions(c)) {
+    const pathLikeOrFileDescriptor = a as _fs.PathLike | FileDescriptor;
+    const data = b as string | Uint8Array;
+    return _appendFile(pathLikeOrFileDescriptor, data, c);
+  }
 }
