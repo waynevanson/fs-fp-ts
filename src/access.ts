@@ -30,7 +30,7 @@ export function getAccessMode(mode: AccessMode) {
 /**
  * Uniquify and reduce the access modes into a number that fs can handle.
  */
-export function transformAccessModes(modes: AccessMode[]) {
+export function transformAccessModes(modes: AccessMode[] = ["visible"]) {
   return pipe(
     modes,
     A.uniq(EQ.contramap((a: AccessMode): string => a)(EQ.eqString)),
