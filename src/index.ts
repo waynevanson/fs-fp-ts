@@ -24,3 +24,4 @@ export { readdir, ReadDirInput } from "./readdir";
 export { rmdir } from "./rmdir";
 export { WritableData, writeFile } from "./write-file";
 export { unlink } from "./unlink";
+export { PathLike } from "fs";
