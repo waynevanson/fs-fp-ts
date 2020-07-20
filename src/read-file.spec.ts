@@ -54,11 +54,17 @@ describe.each(tableBuffer)(fs.readFile.name, ({ name, property }) => {
   test(name, async () => {
     await fc.assert(
       fc.asyncProperty(fc.hexaString(), fc.string(), async (dir, content) => {
-        const result = await subject(property)({
-          dir: path.resolve(fixturesDir, "write-file" + dir),
+        const input = {
+          dir: path.resolve(fixturesDir, "write-file-buffer" + dir),
           content,
-        })();
-        expect(result).toStrictEqual(E.right(Buffer.from(content)));
+        };
+
+        const result = await pipe(
+          subject(property),
+          RTE.map((buffer) => buffer.toString())
+        )(input)();
+
+        expect(result).toStrictEqual(E.right(content));
       })
     );
   });
@@ -82,10 +88,11 @@ describe.each(tableString)(fs.readFile.name, ({ name, property }) => {
   test(name, async () => {
     await fc.assert(
       fc.asyncProperty(fc.hexaString(), fc.string(), async (dir, content) => {
-        const result = await subject(property)({
-          dir: path.resolve(fixturesDir, "write-file" + dir),
+        const input = {
+          dir: path.resolve(fixturesDir, "write-file-string" + dir),
           content,
-        })();
+        };
+        const result = await subject(property)(input)();
         expect(result).toStrictEqual(E.right(content));
       })
     );
