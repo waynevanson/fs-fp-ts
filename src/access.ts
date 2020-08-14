@@ -61,7 +61,7 @@ export function _access<U extends AccessMode>(
 
 export function access<U extends AccessMode>(
   modes?: AccessOptions<U>
-): ReaderTaskEitherNode<_fs.PathLike>;
+): (pathLike: _fs.PathLike) => TaskEitherNode;
 
 export function access<U extends AccessMode>(
   pathLike: _fs.PathLike,
