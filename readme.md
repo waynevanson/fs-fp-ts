@@ -14,11 +14,13 @@ If there are any changes you want to see, even if small, please raise an issue.
 ## Goals
 
 - [ ] All existing `fs` API's but functional.
-- [ ] Clearer documentation.
-- [ ] Partially applied functions sensibly implemented.
-- [ ] Reader implementations with File Descriptor and PathLike.
+- [ ] Stricter types.
+- [ ] Better types.
+- [ ] Sensible and standard overloads across library.
 
 ## Installation
+
+Requires `Typescript ^4.x` so that param argumnents can be modified nicely with functions.
 
 `fp-ts-node` has a peer dependency of `fp-ts`.
 
@@ -29,14 +31,3 @@ yarn add fs-fp-ts fp-ts
 // npm
 npm install fs-fp-ts fp-ts
 ```
-
-## Excluded
-
-Any node stream API has been left out.
-
-- read
-- opendir
-
-## Tests
-
-The purpose of the tests is to check if the overloads work correctly.
