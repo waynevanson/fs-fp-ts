@@ -3,7 +3,10 @@ import { readerTaskEither as RTE, reader as R, taskEither as TE } from "fp-ts";
 import * as fs from "./src";
 import { pipe } from "fp-ts/lib/function";
 
-export const fixturesDir = path.resolve(__dirname, "./__temp/fixtures");
+export const join = (...to: readonly [string, ...string[]]) => (from: string) =>
+  path.join(from, ...to);
+
+export const fixturesDir = pipe(__dirname, join("./__temp/fixtures"));
 
 export interface FileArgsDeps {
   dir: string;
