@@ -50,7 +50,7 @@ const subject = <T>(rReadFile: (deps: FileArgsDeps) => TaskEitherNode<T>) =>
 // any ideas on how to make it nicer?
 // or is this what property testing looks like?
 
-describe.each(tableBuffer)(fs.readFile.name, ({ name, property }) => {
+describe.skip.each(tableBuffer)(fs.readFile.name, ({ name, property }) => {
   test(name, async () => {
     await fc.assert(
       fc.asyncProperty(fc.hexaString(), fc.string(), async (dir, content) => {
@@ -84,7 +84,7 @@ const tableString: Array<{
   },
 ];
 
-describe.each(tableString)(fs.readFile.name, ({ name, property }) => {
+describe.skip.each(tableString)(fs.readFile.name, ({ name, property }) => {
   test(name, async () => {
     await fc.assert(
       fc.asyncProperty(fc.hexaString(), fc.string(), async (dir, content) => {

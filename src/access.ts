@@ -2,7 +2,7 @@ import { array as A, eq as EQ, taskEither as TE } from "fp-ts";
 import { pipe } from "fp-ts/lib/pipeable";
 import * as _fs from "fs";
 import { enforceErrnoException, EnforceNonEmptyArray, isOptions } from "./util";
-import { ReaderTaskEitherNode, TaskEitherNode } from "./util/types/fp";
+import { TaskEitherNode } from "./util/types/fp";
 
 /**
  * @summary
