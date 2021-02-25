@@ -7,3 +7,4 @@ export declare const bufferMonoid: Monoid<Buffer>;
 export declare const bufferEquals: Eq<Buffer>;
 export declare const bufferCompare: Ord<Buffer>;
 export declare const encode: (encoding?: BufferEncoding) => (fa: Buffer) => string;
+export declare const decode: (encoding?: BufferEncoding) => (fa: string) => Buffer;

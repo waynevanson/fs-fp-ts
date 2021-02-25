@@ -8,3 +8,4 @@ export const bufferEquals = {
 };
 export const bufferCompare = Object.assign(Object.assign({}, bufferEquals), { compare: (x, y) => x.compare(y) });
 export const encode = (encoding = "utf-8") => (fa) => fa.toString(encoding);
+export const decode = (encoding = "utf-8") => (fa) => Buffer.from(fa, encoding);

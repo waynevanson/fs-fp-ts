@@ -1,3 +1,11 @@
+# [1.2.0](http://github.com/waynevanson/fs-fp-ts/compare/v1.1.0...v1.2.0) (2021-02-25)
+
+
+### Features
+
+* makes flag an optional parameter in readFile ([f73313e](http://github.com/waynevanson/fs-fp-ts/commit/f73313e12f5922f1a768fd5d653ffb3c30e58ddb))
+* **buffer:** adds decode ([4af68fe](http://github.com/waynevanson/fs-fp-ts/commit/4af68fe0e30f459d0abb1a3918f7dc4bc415fcab))
+
 # [1.1.0](http://github.com/waynevanson/fs-fp-ts/compare/v1.0.0...v1.1.0) (2021-02-25)
 
 

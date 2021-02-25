@@ -11,7 +11,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.encode = exports.bufferCompare = exports.bufferEquals = exports.bufferMonoid = exports.zero = void 0;
+exports.decode = exports.encode = exports.bufferCompare = exports.bufferEquals = exports.bufferMonoid = exports.zero = void 0;
 var zero = function () { return Buffer.from([]); };
 exports.zero = zero;
 exports.bufferMonoid = {
@@ -29,3 +29,10 @@ var encode = function (encoding) {
     };
 };
 exports.encode = encode;
+var decode = function (encoding) {
+    if (encoding === void 0) { encoding = "utf-8"; }
+    return function (fa) {
+        return Buffer.from(fa, encoding);
+    };
+};
+exports.decode = decode;
