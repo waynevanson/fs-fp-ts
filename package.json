@@ -15,7 +15,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "test": "yarn jest",
+    "test": "yarn jest --passWithNoTests",
     "watch": "yarn jest --watchAll",
     "build": "tsc",
     "prepublishOnly": "yarn build"
