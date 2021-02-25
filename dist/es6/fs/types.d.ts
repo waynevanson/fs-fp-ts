@@ -19,7 +19,6 @@ export declare type WriteableData = string | NodeJS.ArrayBufferView;
  * Internally, these options are the stricter counterparts for `_fs.WriteFileOptions`,
  */
 export declare type WriteFileOptions = {
-    encoding?: BufferEncoding;
     flags?: Flags;
     mode?: FileMode;
 };

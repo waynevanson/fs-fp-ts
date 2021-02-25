@@ -1,3 +1,10 @@
+# [1.1.0](http://github.com/waynevanson/fs-fp-ts/compare/v1.0.0...v1.1.0) (2021-02-25)
+
+
+### Features
+
+* use NodeJS.ArrayBufferView for data, remmoves encoding from writeFile ([c2f5d31](http://github.com/waynevanson/fs-fp-ts/commit/c2f5d3169e6526cb5a4eca8855f9ef9af099bf7e))
+
 # 1.0.0 (2021-02-25)
 
 
