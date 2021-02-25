@@ -5,7 +5,6 @@
     "dist"
   ],
   "description": "fp-ts bindings for the Node File System (FS) API",
-  "homepage": "https://waynevanson.github.io/fs-fp-ts",
   "repository": {
     "url": "http://github.com/waynevanson/fs-fp-ts"
   },
