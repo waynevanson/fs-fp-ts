@@ -8,3 +8,6 @@ export const readFile = (flag) => (path) => pipe(TE.tryCatch(promise((executor) 
 export const writeFile = (options = {}) => (path) => (data) => pipe(TE.tryCatch(promise((executor) => {
     FS.writeFile(path, data, options, handleErrors(executor));
 }), asNodeJSError), TE.map(constVoid));
+export const access = (mode) => (path) => pipe(TE.tryCatch(promise((executor) => {
+    FS.access(path, mode, handleErrors(executor));
+}), asNodeJSError), TE.map(constVoid));

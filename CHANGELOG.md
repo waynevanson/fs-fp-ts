@@ -1,3 +1,10 @@
+# [1.3.0-beta.1](http://github.com/waynevanson/fs-fp-ts/compare/v1.2.0...v1.3.0-beta.1) (2021-02-25)
+
+
+### Features
+
+* **fs:** adds access ([bb697f8](http://github.com/waynevanson/fs-fp-ts/commit/bb697f82ee332ba783bec1ef3eabb627ed84386b))
+
 # [1.2.0](http://github.com/waynevanson/fs-fp-ts/compare/v1.1.0...v1.2.0) (2021-02-25)
 
 
