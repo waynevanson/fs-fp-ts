@@ -6,7 +6,8 @@
     "strict": true,
     "alwaysStrict": true,
     "target": "es5",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "moduleResolution": "node"
   },
   "include": ["src"]
 }
