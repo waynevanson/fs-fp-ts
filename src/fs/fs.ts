@@ -1,7 +1,7 @@
 import { taskEither as TE } from "fp-ts";
 import { constVoid, pipe } from "fp-ts/lib/function";
 import * as FS from "fs";
-import { Flags, PathLikeOrFD, WriteableData, WriteFileOptions } from "../types";
+import { Flags, PathLikeOrFD, WriteableData, WriteFileOptions } from "./types";
 import {
   asNodeJSError,
   extractFromTuplet,
