@@ -4,7 +4,8 @@
     "outDir": "dist/esm",
     "declaration": true,
     "strict": true,
-    "alwaysStrict": true
+    "alwaysStrict": true,
+    "target": "es6"
   },
   "include": ["src"]
 }
