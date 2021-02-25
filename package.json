@@ -16,7 +16,9 @@
   "scripts": {
     "test": "yarn jest --passWithNoTests",
     "watch": "yarn jest --watchAll",
-    "build": "tsc",
+    "build": "npm-run-all --parallel build:*",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:es6": "tsc -p tsconfig.es6.json",
     "prepublishOnly": "yarn build"
   },
   "peerDependencies": {
@@ -29,6 +31,7 @@
     "fp-ts": "^2.9.5",
     "jest": "^26.6.3",
     "monocle-ts": "^2.3.5",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.2.1",
     "semantic-release": "^17.3.9",
     "ts-jest": "^26.5.1",
