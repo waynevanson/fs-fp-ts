@@ -72,8 +72,8 @@ describe("fs", () => {
   );
 
   const failableOctals = pipe([1, 3, 5, 7], octalMap);
-  // read, write or both
-  const passableOctals = pipe([2, 4, 6], octalMap);
+  // exists, read, write and the intersection of all these
+  const passableOctals = pipe([0, 2, 4, 6], octalMap);
 
   describe.each(fixtures)("access", ({ name, dir }) => {
     describe(name, () => {
