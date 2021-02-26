@@ -21,3 +21,6 @@ export const bufferCompare: Ord<Buffer> = {
 
 export const encode = (encoding: BufferEncoding = "utf-8") => (fa: Buffer) =>
   fa.toString(encoding);
+
+export const decode = (encoding: BufferEncoding = "utf-8") => (fa: string) =>
+  Buffer.from(fa, encoding);
