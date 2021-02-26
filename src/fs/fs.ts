@@ -73,3 +73,14 @@ export const unlink = (path: PathLike) =>
     ),
     TE.map(constVoid)
   );
+
+export const stat = (path: PathLike) =>
+  pipe(
+    TE.tryCatch(
+      promise<[FS.Stats]>((executor) => {
+        FS.stat(path, { bigint: false }, handleErrors(executor));
+      }),
+      asNodeJSError
+    ),
+    TE.map(extractFromTuplet)
+  );
