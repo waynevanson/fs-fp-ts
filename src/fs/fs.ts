@@ -1,13 +1,13 @@
 import { taskEither as TE } from "fp-ts";
 import { constVoid, pipe } from "fp-ts/lib/function";
 import * as FS from "fs";
-import { Flags, PathLikeOrFD, WriteableData, WriteFileOptions } from "./types";
 import {
   asNodeJSError,
   extractFromTuplet,
   handleErrors,
   promise,
 } from "../utilities";
+import { Flags, PathLikeOrFD, WriteFileOptions } from "./types";
 
 export const readFile = (flag: Flags) => (path: PathLikeOrFD) =>
   pipe(
@@ -22,7 +22,7 @@ export const readFile = (flag: Flags) => (path: PathLikeOrFD) =>
 
 export const writeFile = (options: WriteFileOptions = {}) => (
   path: PathLikeOrFD
-) => (data: WriteableData) =>
+) => (data: NodeJS.ArrayBufferView) =>
   pipe(
     TE.tryCatch(
       promise<[]>((executor) => {
