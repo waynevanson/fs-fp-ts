@@ -7,7 +7,13 @@ import {
   handleErrors,
   promise,
 } from "../utilities";
-import { Flags, PathLikeOrFD, WriteFileOptions } from "./types";
+import {
+  Flags,
+  PathLikeOrFD,
+  WriteFileOptions,
+  FileMode,
+  PathLike,
+} from "./types";
 
 export const readFile = (flag?: Flags) => (path: PathLikeOrFD) =>
   pipe(
@@ -27,6 +33,17 @@ export const writeFile = (options: WriteFileOptions = {}) => (
     TE.tryCatch(
       promise<[]>((executor) => {
         FS.writeFile(path, data, options, handleErrors(executor));
+      }),
+      asNodeJSError
+    ),
+    TE.map(constVoid)
+  );
+
+export const access = (mode?: FileMode) => (path: PathLike) =>
+  pipe(
+    TE.tryCatch(
+      promise<[]>((executor) => {
+        FS.access(path, mode, handleErrors(executor));
       }),
       asNodeJSError
     ),
