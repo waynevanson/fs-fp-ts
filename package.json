@@ -14,7 +14,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "test": "yarn jest",
+    "test": "yarn jest --coverage",
     "watch": "yarn jest --watchAll",
     "build": "npm-run-all --parallel build:*",
     "build:cjs": "tsc -p tsconfig.cjs.json",
