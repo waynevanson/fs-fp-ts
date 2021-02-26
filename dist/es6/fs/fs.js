@@ -11,3 +11,4 @@ export const writeFile = (options = {}) => (path) => (data) => pipe(TE.tryCatch(
 export const access = (mode) => (path) => pipe(TE.tryCatch(promise((executor) => {
     FS.access(path, mode, handleErrors(executor));
 }), asNodeJSError), TE.map(constVoid));
+export const unlink = (path) => pipe(TE.tryCatch(promise((executor) => FS.unlink(path, handleErrors(executor))), asNodeJSError), TE.map(constVoid));

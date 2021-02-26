@@ -19,7 +19,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.access = exports.writeFile = exports.readFile = void 0;
+exports.unlink = exports.access = exports.writeFile = exports.readFile = void 0;
 var fp_ts_1 = require("fp-ts");
 var function_1 = require("fp-ts/lib/function");
 var FS = __importStar(require("fs"));
@@ -45,3 +45,7 @@ var access = function (mode) { return function (path) {
     }), utilities_1.asNodeJSError), fp_ts_1.taskEither.map(function_1.constVoid));
 }; };
 exports.access = access;
+var unlink = function (path) {
+    return function_1.pipe(fp_ts_1.taskEither.tryCatch(utilities_1.promise(function (executor) { return FS.unlink(path, utilities_1.handleErrors(executor)); }), utilities_1.asNodeJSError), fp_ts_1.taskEither.map(function_1.constVoid));
+};
+exports.unlink = unlink;
