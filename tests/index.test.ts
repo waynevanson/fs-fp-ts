@@ -136,4 +136,34 @@ describe("fs", () => {
     );
   });
 
+  describe("link", () => {
+    const from = path.resolve(__dirname, "./fixtures", "hard_link_target");
+    const to = path.resolve(__dirname, "./fixtures", "hard_link_to");
+
+    test(
+      "create the hard link",
+      pipe(FS.link(to), RT.chainIOK(AS.failLeft))(from)
+    );
+
+    test(
+      "ensure file exist",
+      pipe(FS.access(0o000), RT.chainIOK(AS.failLeft))(to)
+    );
+
+    test(
+      "compare inodes of 'from' and 'to' for equality",
+      pipe(
+        FS.stat(to),
+        TE.bindTo("to"),
+        TE.bind("from", () => FS.stat(from)),
+        T.chainIOK(AS.failLeft),
+        // surely there's a better way. EQ.contramap?
+        T.chainIOK(({ from: { ino: from }, to: { ino: to } }) =>
+          AS.strictEqual(from)(to)
+        )
+      )
+    );
+
+    test("removes the hard link", pipe(FS.unlink(to), T.chainIOK(AS.failLeft)));
+  });
 });
