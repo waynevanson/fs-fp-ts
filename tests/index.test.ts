@@ -1,5 +1,10 @@
-import { array as A, task as T } from "fp-ts";
-import { pipe } from "fp-ts/lib/function";
+import {
+  array as A,
+  task as T,
+  taskEither as TE,
+  readerTask as RT,
+} from "fp-ts";
+import { flow, pipe } from "fp-ts/lib/function";
 import * as path from "path";
 import { buffer as BF, fs as FS } from "../src";
 import * as AS from "./assert";
@@ -60,4 +65,25 @@ describe("fs", () => {
       });
     }
   );
+
+  const octalMap = flow(
+    A.map((n: number) => `0o00${n}`),
+    A.map((string) => ({ string, number: Number(string) as FS.FileMode }))
+  );
+
+  const failableOctals = pipe([1, 3, 5, 7], octalMap);
+  // read, write or both
+  const passableOctals = pipe([2, 4, 6], octalMap);
+
+  describe.each(fixtures)("access", ({ name, dir }) => {
+    describe(name, () => {
+      describe.each(failableOctals)("fail", ({ string, number }) => {
+        test(string, pipe(dir, FS.access(number), T.chainIOK(AS.failRight())));
+      });
+
+      describe.each(passableOctals)("pass", ({ string, number }) => {
+        test(string, pipe(dir, FS.access(number), T.chainIOK(AS.failLeft())));
+      });
+    });
+  });
 });
