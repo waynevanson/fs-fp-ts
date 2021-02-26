@@ -1,4 +1,4 @@
-import { array as A, task as T } from "fp-ts";
+import { array as A, reader as R, readerTask as RT, task as T } from "fp-ts";
 import { flow, pipe } from "fp-ts/lib/function";
 import * as path from "path";
 import { buffer as BF, fs as FS } from "../src";
@@ -81,4 +81,24 @@ describe("fs", () => {
       });
     });
   });
+
+  const destination = path.resolve(__dirname, "./fixtures", "newfile");
+
+  describe("writeFile", () => {
+    test(
+      "writes the file",
+      pipe(
+        // todo - this flag should report an error if the file wasn't unlinked.
+        FS.writeFile({ flags: "ax" }),
+        R.ap(R.of(BF.zero())),
+        RT.chainIOK(AS.failLeft)
+      )(destination)
+    );
+
+    test(
+      "newly created file exists",
+      pipe(FS.access(0o000), RT.chainIOK(AS.failLeft))(destination)
+    );
+  });
+
 });
