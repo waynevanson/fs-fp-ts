@@ -1,3 +1,7 @@
+/**
+ * @summary
+ * API's directly from the `fs` module in node.
+ */
 import { taskEither as TE } from "fp-ts";
 import { constVoid, pipe } from "fp-ts/lib/function";
 import * as FS from "fs";
@@ -44,6 +48,17 @@ export const access = (mode?: FileMode) => (path: PathLike) =>
     TE.tryCatch(
       promise<[]>((executor) => {
         FS.access(path, mode, handleErrors(executor));
+      }),
+      asNodeJSError
+    ),
+    TE.map(constVoid)
+  );
+
+export const link = (to: PathLike) => (from: string) =>
+  pipe(
+    TE.tryCatch(
+      promise((executor) => {
+        FS.link(from, to, handleErrors(executor));
       }),
       asNodeJSError
     ),
