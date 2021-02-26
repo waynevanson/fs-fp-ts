@@ -19,7 +19,11 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.unlink = exports.access = exports.writeFile = exports.readFile = void 0;
+exports.statBigInt = exports.stat = exports.unlink = exports.link = exports.access = exports.writeFile = exports.readFile = void 0;
+/**
+ * @summary
+ * API's directly from the `fs` module in node.
+ */
 var fp_ts_1 = require("fp-ts");
 var function_1 = require("fp-ts/lib/function");
 var FS = __importStar(require("fs"));
@@ -45,7 +49,25 @@ var access = function (mode) { return function (path) {
     }), utilities_1.asNodeJSError), fp_ts_1.taskEither.map(function_1.constVoid));
 }; };
 exports.access = access;
+var link = function (to) { return function (from) {
+    return function_1.pipe(fp_ts_1.taskEither.tryCatch(utilities_1.promise(function (executor) {
+        FS.link(from, to, utilities_1.handleErrors(executor));
+    }), utilities_1.asNodeJSError), fp_ts_1.taskEither.map(function_1.constVoid));
+}; };
+exports.link = link;
 var unlink = function (path) {
     return function_1.pipe(fp_ts_1.taskEither.tryCatch(utilities_1.promise(function (executor) { return FS.unlink(path, utilities_1.handleErrors(executor)); }), utilities_1.asNodeJSError), fp_ts_1.taskEither.map(function_1.constVoid));
 };
 exports.unlink = unlink;
+var stat = function (path) {
+    return function_1.pipe(fp_ts_1.taskEither.tryCatch(utilities_1.promise(function (executor) {
+        FS.stat(path, { bigint: false }, utilities_1.handleErrors(executor));
+    }), utilities_1.asNodeJSError), fp_ts_1.taskEither.map(utilities_1.extractFromTuplet));
+};
+exports.stat = stat;
+var statBigInt = function (path) {
+    return function_1.pipe(fp_ts_1.taskEither.tryCatch(utilities_1.promise(function (executor) {
+        FS.stat(path, { bigint: true }, utilities_1.handleErrors(executor));
+    }), utilities_1.asNodeJSError), fp_ts_1.taskEither.map(utilities_1.extractFromTuplet));
+};
+exports.statBigInt = statBigInt;

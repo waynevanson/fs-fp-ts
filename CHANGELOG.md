@@ -1,3 +1,12 @@
+# [1.4.0](http://github.com/waynevanson/fs-fp-ts/compare/v1.3.0...v1.4.0) (2021-02-26)
+
+
+### Features
+
+* **fs:** adds link ([2d3be6c](http://github.com/waynevanson/fs-fp-ts/commit/2d3be6c1cb7efebf55c2600ad44fc0d8a0194b2a))
+* **fs:** adds statBigInt ([833f97a](http://github.com/waynevanson/fs-fp-ts/commit/833f97a2d97433e0779798f1ebd19924857f51a6))
+* **fs:** adds stats command ([e01f358](http://github.com/waynevanson/fs-fp-ts/commit/e01f3586dfef8a140d50edf609af170ad7f80a31))
+
 # [1.3.0](http://github.com/waynevanson/fs-fp-ts/compare/v1.2.0...v1.3.0) (2021-02-26)
 
 
