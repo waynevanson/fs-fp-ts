@@ -1,3 +1,11 @@
+# [1.3.0](http://github.com/waynevanson/fs-fp-ts/compare/v1.2.0...v1.3.0) (2021-02-26)
+
+
+### Features
+
+* **fs:** adds access ([bb697f8](http://github.com/waynevanson/fs-fp-ts/commit/bb697f82ee332ba783bec1ef3eabb627ed84386b))
+* **fs:** adds unlink command ([70f60df](http://github.com/waynevanson/fs-fp-ts/commit/70f60df1c36ca637de8b7f0c31200f60334df042))
+
 # [1.3.0-beta.1](http://github.com/waynevanson/fs-fp-ts/compare/v1.2.0...v1.3.0-beta.1) (2021-02-25)
 
 
