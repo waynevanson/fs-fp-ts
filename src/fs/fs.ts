@@ -9,7 +9,7 @@ import {
 } from "../utilities";
 import { Flags, PathLikeOrFD, WriteFileOptions } from "./types";
 
-export const readFile = (flag: Flags) => (path: PathLikeOrFD) =>
+export const readFile = (flag?: Flags) => (path: PathLikeOrFD) =>
   pipe(
     TE.tryCatch(
       promise<[Buffer]>((executor) => {
