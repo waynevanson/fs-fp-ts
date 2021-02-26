@@ -49,3 +49,12 @@ export const access = (mode?: FileMode) => (path: PathLike) =>
     ),
     TE.map(constVoid)
   );
+
+export const unlink = (path: PathLike) =>
+  pipe(
+    TE.tryCatch(
+      promise<[]>((executor) => FS.unlink(path, handleErrors(executor))),
+      asNodeJSError
+    ),
+    TE.map(constVoid)
+  );
