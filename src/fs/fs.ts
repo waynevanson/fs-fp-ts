@@ -84,3 +84,14 @@ export const stat = (path: PathLike) =>
     ),
     TE.map(extractFromTuplet)
   );
+
+export const statBigInt = (path: PathLike) =>
+  pipe(
+    TE.tryCatch(
+      promise<[FS.BigIntStats]>((executor) => {
+        FS.stat(path, { bigint: true }, handleErrors(executor));
+      }),
+      asNodeJSError
+    ),
+    TE.map(extractFromTuplet)
+  );
