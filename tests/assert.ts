@@ -23,3 +23,5 @@ export const fail = (description?: string) => <A>(
     )
   );
 
+export const failLeft = (description?: string) => <E, A>(fa: E.Either<E, A>) =>
+  pipe(fa, E.fold(fail(description), IO.of)) as IO.IO<A>;
