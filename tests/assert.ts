@@ -1,5 +1,6 @@
 import * as assert from "assert";
-import { io as IO } from "fp-ts";
+import { io as IO, either as E } from "fp-ts";
+import { pipe } from "fp-ts/lib/pipeable";
 
 export const factory = (f: (result: unknown, expected: unknown) => void) => <A>(
   b: A
@@ -9,3 +10,16 @@ export const strictEqual = factory(assert.strictEqual);
 export const deepStrictEqual = factory(assert.deepStrictEqual);
 export const notStrictEqual = factory(assert.notStrictEqual);
 export const notDeepStrictEqual = factory(assert.notDeepStrictEqual);
+
+export const fail = (description?: string) => <A>(
+  value: A
+): IO.IO<void> => () =>
+  assert.fail(
+    new Error(
+      JSON.stringify({
+        value,
+        description,
+      })
+    )
+  );
+
