@@ -101,4 +101,15 @@ describe("fs", () => {
     );
   });
 
+  describe("unlink", () => {
+    test(
+      "removes the file",
+      pipe(FS.unlink, RT.chainIOK(AS.failLeft))(destination)
+    );
+
+    test(
+      "recently removed file no longer exist",
+      pipe(FS.access(0o000), RT.chainIOK(AS.failRight))(destination)
+    );
+  });
 });
