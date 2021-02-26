@@ -1,9 +1,4 @@
-import {
-  array as A,
-  task as T,
-  taskEither as TE,
-  readerTask as RT,
-} from "fp-ts";
+import { array as A, task as T } from "fp-ts";
 import { flow, pipe } from "fp-ts/lib/function";
 import * as path from "path";
 import { buffer as BF, fs as FS } from "../src";
@@ -48,19 +43,19 @@ describe("fs", () => {
   describe.each(fixtures)(
     "readFile",
     ({ name, contents: { utf8, buffer }, dir }: Fixture) => {
-      const tdawgs = pipe(dir, FS.readFile(), T.chainIOK(AS.failLeft()));
+      const setup = pipe(dir, FS.readFile(), T.chainIOK(AS.failLeft));
 
       describe(name, () => {
-        test("reads the file", tdawgs);
+        test("reads the file", setup);
 
         test(
           "buffer",
-          pipe(tdawgs, T.chainFirst(T.fromIOK(AS.deepStrictEqual(buffer))))
+          pipe(setup, T.chainFirst(T.fromIOK(AS.deepStrictEqual(buffer))))
         );
 
         test(
           "utf8",
-          pipe(tdawgs, T.map(BF.encode()), T.chainIOK(AS.strictEqual(utf8)))
+          pipe(setup, T.map(BF.encode()), T.chainIOK(AS.strictEqual(utf8)))
         );
       });
     }
@@ -78,11 +73,11 @@ describe("fs", () => {
   describe.each(fixtures)("access", ({ name, dir }) => {
     describe(name, () => {
       describe.each(failableOctals)("fail", ({ string, number }) => {
-        test(string, pipe(dir, FS.access(number), T.chainIOK(AS.failRight())));
+        test(string, pipe(dir, FS.access(number), T.chainIOK(AS.failRight)));
       });
 
       describe.each(passableOctals)("pass", ({ string, number }) => {
-        test(string, pipe(dir, FS.access(number), T.chainIOK(AS.failLeft())));
+        test(string, pipe(dir, FS.access(number), T.chainIOK(AS.failLeft)));
       });
     });
   });
