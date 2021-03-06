@@ -1,6 +1,17 @@
 import * as assert from "assert";
-import { either as E, io as IO } from "fp-ts";
+import {
+  array as A,
+  either as E,
+  io as IO,
+  stateReaderTaskEither,
+  task as T,
+  writer as WR,
+} from "fp-ts";
 import { pipe } from "fp-ts/lib/pipeable";
+import { observable as OB } from "fp-ts-rxjs";
+import { Functor } from "fp-ts/lib/Functor";
+import { HKT } from "fp-ts/lib/HKT";
+import { Applicative } from "fp-ts/lib/Applicative";
 
 export const factory = (f: (result: unknown, expected: unknown) => void) => <A>(
   b: A
@@ -29,3 +40,36 @@ export const failLeft = <E, A>(fa: E.Either<E, A>) =>
 
 export const failRight = <E, A>(fa: E.Either<E, A>) =>
   pipe(fa, E.fold(IO.of, fail)) as IO.IO<E>;
+
+// run `fa`
+// description
+type TestData = string;
+
+// all tests are tasks.
+// as tests complete, log it. with an observable.
+// tasks = Array<Task>
+// (tests: Array<Task>) => pipe(tests,A.map(test => pipe(test, )))
+
+type Test<F, E, A> = [HKT<F, E.Either<E, A>>, string];
+
+type FailError<A> = {
+  _tag: "Threw";
+  error: A;
+};
+
+type FailNotEqual<A, B> = {
+  _tag: "NotEqual";
+  expected: A;
+  received: B;
+};
+
+export type Fail<E, A> = FailError<A> | FailNotEqual<E, A>;
+
+// turn HKT into an observable,
+const dotests = <F>(Applicative: Applicative<F>) => <E, A>(
+  tests: Array<Test<F, E, A>>
+) =>
+  pipe(
+    tests,
+    A.map(([fa, description]) => pipe(OB.of(`Starting test ${description}`)))
+  );
