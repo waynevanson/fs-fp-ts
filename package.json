@@ -1,5 +1,5 @@
 {
-  "name": "monorepo",
+  "name": "@fp-ts-node/monorepo",
   "scripts": {},
   "devDependencies": {
     "@jest/types": "^27.0.2",
