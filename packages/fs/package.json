@@ -1,0 +1,14 @@
+{
+  "name": "@fp-ts-node/fs",
+  "scripts": {
+    "build": "tsc configuration/tsconfig.es6.json & tsc configuration/tsconfig.cjs.json",
+    "test": "jest ../../configuration/jest.config.ts",
+    "watch": "jest --watchAll"
+  },
+  "version": "0.0.0",
+  "description": "fp-ts bindings for node's fs module",
+  "main": "dist/cjs/index.js",
+  "author": "Wayne Van Son",
+  "license": "MIT",
+  "private": false
+}
