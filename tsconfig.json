@@ -1,13 +1,8 @@
 {
   "compilerOptions": {
-    "module": "es6",
-    "outDir": "dist/es6",
-    "declaration": true,
     "strict": true,
     "alwaysStrict": true,
-    "target": "es5",
     "esModuleInterop": true,
     "moduleResolution": "node"
-  },
-  "include": ["src", "tests"]
+  }
 }
